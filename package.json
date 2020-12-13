@@ -1,0 +1,27 @@
+{
+  "name": "varamin",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/alireza_ftekhari/varamin.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/alireza_ftekhari/varamin/issues"
+  },
+  "homepage": "https://gitlab.com/alireza_ftekhari/varamin#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "package.json": "^2.0.1",
+    "socket.io": "^2.3.0"
+  }
+}

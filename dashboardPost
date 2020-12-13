@@ -1,0 +1,36 @@
+<!-- post to display-edit -->
+        <script>
+        function submitDisplay() {
+          document.getElementById('displayForm').submit();
+        }
+
+        function submitSta() {
+          document.getElementById('staForm').submit();
+        } 
+
+        function submitConfig() {
+          document.getElementById('configForm').submit();
+        }
+        </script>
+
+
+
+
+      ///////////////////
+        <form id="displayForm" method="POST" action="display.php" target="_blank">
+            <input name="username" style="display: none;" value="$uname" />
+            <input name="password" style="display: none;" value="$pass" />
+            <input name="usergrup" style="display: none;" value="$usergrup" />
+        </form>
+
+        <form id="staForm" method="POST" action="statistics.php">
+          <input name="username" style="display: none;" value="$uname" />
+          <input name="password" style="display: none;" value="$pass" />
+          <input name="usergrup" style="display: none;" value="$usergrup" />
+        </form>
+
+        <form id="configForm" method="POST" action="configuration.php">
+          <input name="username" style="display: none;" value="$uname" />
+          <input name="password" style="display: none;" value="$pass" />
+          <input name="usergrup" style="display: none;" value="$usergrup" />
+        </form>

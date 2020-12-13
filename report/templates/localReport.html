@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>{title}</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../../lib/bootstrap.min.css">
+  <link rel="stylesheet" href="../../lib/style.css">
+  <link rel="stylesheet" href="../../lib/fonts.css">
+  <script src="../../lib/jquery.min.js"></script>
+  <script src="../../lib/popper.min.js"></script>
+  <script src="../../lib/bootstrap.min.js"></script>
+  <style>
+    td, th {
+      text-align: center;
+      font-size: 12px;
+      padding: 0 !important;
+    }
+    button {
+    text-decoration: none;
+    display: inline-block;
+    padding: 8px 16px;
+    }
+
+    button:hover {
+    background-color: rgb(19, 147, 206);
+    color: black;
+    }
+
+    .previous {
+    background-color: #e24949;
+    color: black;
+    }
+
+    .next {
+    background-color: #4CAF50;
+    color: white;
+    }
+    #pgnum{
+      width: 9%;
+      display: inline-block;
+    }
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    button:disabled,
+    button[disabled]{
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
+  }
+
+    /* Firefox */
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+    .round {
+      border-radius: 50%;
+    }
+
+    input[type='number']::-webkit-inner-spin-button, 
+    input[type='number']::-webkit-outer-spin-button { 
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    button {
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12 mt-3 mb-3" style="text-align: center">
+      <button onclick="prev()" class="previous round" id="prev">&#8249;</button>
+      <input readonly="readonly" class="input-sm" value="1" id="pgnum" type="number" style="text-align: center;">
+      <button onclick="next()" class="next round" id="next">&#8250;</button>
+    </div>
+    <div class="col-sm-12">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            {headers}
+          </tr>
+        </thead>
+        <tbody id="tableData">
+        </tbody>
+      </table>
+    </div>
+  </div>         
+</div>
+
+<script>
+  var len = {len};
+  var table = document.getElementById('tableData');
+  $.get(`data/1`, function(data) {
+      table.innerHTML = data;
+  });
+
+  function clear() {
+    table.innerHTML = '';
+  }
+  function next() {
+    clear();
+    let num = parseInt(document.querySelector('#pgnum').value);
+    $.get(`data/${num + 1}`, function(data) {
+      table.innerHTML = data;
+    });
+    document.querySelector('#pgnum').value = num + 1;
+    check();
+
+  }
+  function prev() {
+    clear();
+    let num = parseInt(document.querySelector('#pgnum').value);
+    $.get(`data/${num - 1}`, function(data) {
+      table.innerHTML = data;
+    });
+    document.querySelector('#pgnum').value = num - 1;
+    check();
+
+  }
+
+  function check() {
+    let num = parseInt(document.querySelector('#pgnum').value);
+    if(num === 1) {
+      document.querySelector('#prev').disabled = true;
+    } else {
+      document.querySelector('#prev').disabled = false;
+    }
+    if(num === len) {
+      document.querySelector('#next').disabled = true;
+    } else {
+      document.querySelector('#next').disabled = false;
+    } 
+  }
+  check();
+</script>
+</body>
+</html>

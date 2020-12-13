@@ -1,0 +1,25 @@
+.bgsmoke {
+    background-color: whitesmokes !important;
+}
+
+div.usr {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    width: auto;
+    height: auto;
+    border: 1px solid gray;
+    background: #00f;
+}
+
+div.usr  + div.usr  {
+    border: 1px solid gray;
+}
+
+
+.slabel {
+    text-align: center;
+    padding-right: 0;
+    padding-left: 0;
+}
+

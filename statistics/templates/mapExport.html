@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>گزارش گیری به تفکیک استان</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../lib/bootstrap.min.css">
+  <script src="../lib/jquery.min.js"></script>
+  <script src="../lib/popper.min.js"></script>
+  <script src="../lib/bootstrap.min.js"></script>
+  <style>
+    td, th {
+      text-align: center;
+      font-size: 12px;
+      padding: 0 !important;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-6">
+      <table class="table table-bordered">
+          <thead>
+          <tr>
+              <th>نام استان</th>
+              <th>تمامی دریافت ها</th>
+              <th>تخلفات</th>
+              <th>مشاهدات</th>
+              <th>ویرایشات</th>
+          </tr>
+          </thead>
+          <tbody>
+            {tbody}
+          </tbody>
+      </table>
+      </div>
+    <div class="col-sm-6" style="padding: 4%;">
+        {svg}
+    </div>
+  </div>
+</div>
+</body>
+</html>

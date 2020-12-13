@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>گزارش گیری دوربین ها</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../lib/bootstrap.min.css">
+  <link rel="stylesheet" href="../lib/style.css">
+  <script src="../lib/jquery.min.js"></script>
+  <script src="../lib/popper.min.js"></script>
+  <script src="../lib/bootstrap.min.js"></script>
+  <style>
+    td, th {
+      text-align: center;
+      font-size: 12px;
+      padding: 0 !important;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <table class="table table-bordered">
+          <thead>
+          <tr>
+              <th>دوربین</th>
+              <th>مشاهده شده</th>
+              <th>مشاهده نشده</th>
+              <th>ویرایشات</th>
+              <th>ارسال شده به پلیس</th>
+              <th>ارسال نشده به پلیس</th>
+              <th>گزارشات</th>
+              <th>تمامی دریافت ها</th>
+          </tr>
+          </thead>
+          <tbody>
+            {tbody}
+          </tbody>
+      </table>
+    </div>
+
+    <div class="col-sm-12">
+      <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>دوربین</th>
+            <th>تصویر پر نور</th>
+            <th>تصویر کم نور</th>
+            <th>پلاک پر نور</th>
+            <th>پلاک کم نور</th>
+            <th>پلاک ناواضح</th>
+            <th>سایر ...</th>
+        </tr>
+        </thead>
+        <tbody>
+          {tbodyREP}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col-sm-12">
+        <div class="row" style="direction: rtl;">
+            <div class="col-sm-3 usr" style="background-color: whitesmoke; text-align: center;">
+                <h3>ارسال شده به پلیس</h3>
+                <img id="observes" src="{sent}">
+            </div>
+            <div class="col-sm-3 usr" style="background-color: whitesmoke; text-align: center;">
+                <h3>ارسال نشده به پلیس</h3>
+                <img id="edits" src="{unsent}">
+            </div>
+            <div class="col-sm-3 usr" style="background-color: whitesmoke; text-align: center;">
+                <h3>مشاهده شده</h3>
+                <img id="sents" src="{observed}">
+            </div>
+            <div class="col-sm-3 usr" style="background-color: whitesmoke; text-align: center;">
+                <h3>مشاهده نشده</h3>
+                <img id="reports" src="{unseen}">
+            </div>
+        </div>
+        <div class="row" style="direction: rtl;">
+            <div class="col-sm-4 usr" style="background-color: whitesmoke; text-align: center;">
+                <h3>گزارشات</h3>
+                <img id="sents" src="{rep}">
+            </div>
+            <div class="col-sm-4 usr" style="background-color: whitesmoke; text-align: center;">
+                <h3>تمامی دریافت ها</h3>
+                <img id="edits" src="{allrec}">
+            </div>
+            <div class="col-sm-4 usr" style="background-color: whitesmoke; text-align: center;">
+                <h3>ویرایشات</h3>
+                <img id="reports" src="{edit}">
+            </div>
+        </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+
+</script>
+</body>
+</html>

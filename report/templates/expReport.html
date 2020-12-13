@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>{title}</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="./data/bootstrap.min.css">
+  <link rel="stylesheet" href="./data/style.css">
+  <link rel="stylesheet" href="./data/fonts.css">
+  <script src="./data/jquery.min.js"></script>
+  <script src="./data/popper.min.js"></script>
+  <script src="./data/bootstrap.min.js"></script>
+  <style>
+    td, th {
+      text-align: center;
+      font-size: 12px;
+      padding: 0 !important;
+    }
+    button {
+    text-decoration: none;
+    display: inline-block;
+    padding: 8px 16px;
+    }
+
+    button:hover {
+    background-color: rgb(19, 147, 206);
+    color: black;
+    }
+
+    .previous {
+    background-color: #e24949;
+    color: black;
+    }
+
+    .next {
+    background-color: #4CAF50;
+    color: white;
+    }
+    #pgnum{
+      width: 9%;
+      display: inline-block;
+    }
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    button:disabled,
+    button[disabled]{
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
+  }
+
+    /* Firefox */
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+    .round {
+      border-radius: 50%;
+    }
+
+    input[type='number']::-webkit-inner-spin-button, 
+    input[type='number']::-webkit-outer-spin-button { 
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    button {
+      cursor: pointer;
+    }
+
+
+    /*style.css*/
+
+
+.svg-inline--fa {
+    width: 1.125em;
+}
+
+.plateWhite {
+    background-image: url('./data/plateWhite.png');
+}
+
+.plateBox {
+    float: left;
+    background-size: 100%100%;
+    font-family: "Roya", sans-serif;
+    width: 245px;
+    height: 50px;
+}
+
+.box1 {
+    float: left;
+    margin: 1.3% 0% 0% 10.2%;
+    width: 17%;
+    height: 87.3%;
+}
+.box2 {
+    float: left;
+    margin: 1.3% 0% 0% 0%;
+    width: 23%;
+    height: 87.3%;
+    direction: rtl;
+}
+.box3 {
+    float: left;
+    margin: 1.3% 0% 0% 0%;
+    width: 26.4%;
+    height: 87.3%;
+}
+.box4 {
+    float: left;
+    margin: 5% 0% 0% 1%;
+    width: 20%;
+    height: 68%;
+}
+
+.boxNumber1, .boxNumber3, .boxNumber1s, .boxNumber3s {
+    width: 100%;
+    height: 100%;
+    font-size: xx-large;
+    text-align: center;
+    font-weight: bold;
+    padding-top: 15%;
+}
+
+.boxNumber2, .boxNumber2s {
+    width: 100%;
+    height: 100%;
+    font-size: xx-large;
+    text-align: center;
+    font-weight: bold;
+    padding-top: 5%;
+}
+
+.boxNumber4, .boxNumber4s {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    font-size: x-large;
+    font-weight: bold;
+    border-radius: 0px 0px 3px 0px;
+    padding-top: 15%;
+}
+.plateWhite div input {
+    background-color: white;
+}
+
+/*fonts.css*/
+
+  @font-face {
+    font-family: "Roya";
+    font-weight: bold;
+    src: url("./data/BRoyaBold.woff2") format("woff2"), url("./data/BRoyaBold.woff") format("woff");
+  }
+  
+ 
+  
+
+  
+  </style>
+</head>
+<body>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12 mt-3 mb-3" style="text-align: center">
+      <button onclick="prev()" class="previous round" id="prev">&#8249;</button>
+      <input readonly="readonly" class="input-sm" value="1" id="pgnum" type="number" style="text-align: center;">
+      <button onclick="next()" class="next round" id="next">&#8250;</button>
+    </div>
+    <div class="col-sm-12">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            {headers}
+          </tr>
+        </thead>
+        <tbody id="tableData">
+        </tbody>
+      </table>
+    </div>
+  </div>         
+</div>
+
+<script>
+  var len = {len};
+  var table = document.getElementById('tableData');
+  var data = [];
+  data.push('salam');
+  {dataArr}
+
+  table.innerHTML = data[1];
+ 
+
+  function clear() {
+    table.innerHTML = '';
+  }
+  function next() {
+    clear();
+    let num = parseInt(document.querySelector('#pgnum').value);
+    table.innerHTML = data[num + 1];
+    document.querySelector('#pgnum').value = num + 1;
+    check();
+
+  }
+  function prev() {
+    clear();
+    let num = parseInt(document.querySelector('#pgnum').value);
+    table.innerHTML = data[num - 1];
+    document.querySelector('#pgnum').value = num - 1;
+    check();
+  }
+
+  function check() {
+    let num = parseInt(document.querySelector('#pgnum').value);
+    if(num === 1) {
+      document.querySelector('#prev').disabled = true;
+    } else {
+      document.querySelector('#prev').disabled = false;
+    }
+    if(num === len) {
+      document.querySelector('#next').disabled = true;
+    } else {
+      document.querySelector('#next').disabled = false;
+    } 
+  }
+  check();
+</script>
+</body>
+</html>

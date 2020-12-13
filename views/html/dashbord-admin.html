@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html class="loading" lang="fa" data-textdirection="rtl">
+<!-- BEGIN: Head-->
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description"
+        content="Vuexy admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
+    <meta name="keywords"
+        content="admin template, Vuexy admin template, dashboard template, flat admin template, responsive admin template, web app">
+    <meta name="author" content="PIXINVENT">
+    <title>سامانه مانیتورینگ و تجمیع داده</title>
+
+    <!-- BEGIN: Vendor CSS-->
+    <link rel="stylesheet" type="text/css" href="../pr/app-assets/vendors/css/vendors-rtl.min.css">
+    <link rel="stylesheet" type="text/css" href="../pr/app-assets/css-rtl/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../pr/app-assets/css-rtl/bootstrap-extended.css">
+    <link rel="stylesheet" type="text/css" href="../pr/app-assets/css-rtl/components.css">
+    <link rel="stylesheet" type="text/css" href="../pr/app-assets/css-rtl/vertical-menu.css">
+    <link rel="stylesheet" type="text/css" href="../pr/app-assets/css-rtl/custom-rtl.css">
+    <!--leaflet-->
+    <link rel="stylesheet" type="text/css" href="./views/styles/leaflet.css">
+    <style>
+        #map{
+            width: 100%;
+            height: 500px;
+        }
+    </style>
+    <!-- END: Custom CSS-->
+
+</head>
+<!-- END: Head-->
+
+<!-- BEGIN: Body-->
+
+<body class="vertical-layout vertical-menu-modern 2-columns  navbar-floating footer-static  todo-application"
+    data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
+
+    <!---begin forms-->
+    <script>
+        function submitDisplay() {
+          document.getElementById('displayForm').submit();
+        }
+
+        function submitSta() {
+          document.getElementById('staForm').submit();
+        } 
+
+        function submitConfig() {
+          document.getElementById('configForm').submit();
+        }
+    </script>
+    <form id="displayForm" method="POST" action="display.php" target="_blank">
+        <input name="username" style="display: none;" value="{$uname}" />
+        <input name="password" style="display: none;" value="{$pass}" />
+        <input name="usergrup" style="display: none;" value="{$usergrup}" />
+    </form>
+    
+    <form id="staForm" method="POST" action="statistics.php">
+      <input name="username" style="display: none;" value="{$uname}" />
+      <input name="password" style="display: none;" value="{$pass}" />
+      <input name="usergrup" style="display: none;" value="{$usergrup}" />
+    </form>
+
+    <form id="configForm" method="POST" action="configuration.php">
+      <input name="username" style="display: none;" value="{$uname}" />
+      <input name="password" style="display: none;" value="{$pass}" />
+      <input name="usergrup" style="display: none;" value="{$usergrup}" />
+    </form>
+
+    <!--end forms-->
+    
+    
+    <!-- BEGIN: Header-->
+    <nav class="header-navbar navbar-expand-lg navbar navbar-with-menu floating-nav navbar-light navbar-shadow">
+        <div class="navbar-wrapper">
+            <div class="navbar-container content">
+                <div class="navbar-collapse" id="navbar-mobile">
+                    <div class="mr-auto float-left bookmark-wrapper d-flex align-items-center">
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item mobile-menu d-xl-none mr-auto"><a
+                                    class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i
+                                        class="ficon feather icon-menu"></i></a></li>
+                            <li>
+                                <span>داشبورد</span>
+                            </li>
+                        </ul>
+
+
+
+
+                    </div>
+                    <ul class="nav navbar-nav float-right">
+
+                        <li class="dropdown dropdown-user nav-item"><a href="#"
+                                class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
+                                <div class="user-nav d-sm-flex d-none">
+                                    <span class="user-name">{user-name}
+                                    </span></div>
+                                <div class="user-icon">
+                                    <i class="feather icon-user"></i>
+                                </div>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <p class="dropdown-item">
+                                    <i class="feather icon-clock"></i> 
+                               
+                                    {time-login} زمان ورود به سیستم
+                            </p>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item"
+                                    href="index.php"><i class="feather icon-power"></i> خروج از سیستم</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- END: Header-->
+
+
+    <!-- BEGIN: Main Menu-->
+    <div class="main-menu menu-fixed menu-light menu-accordion menu-shadow" data-scroll-to-active="true">
+        <div class="navbar-header">
+            <ul class="nav navbar-nav flex-row">
+                <li class="nav-item mr-auto"><a class="navbar-brand" href="/">
+                        <img src="../pr/app-assets/images/logo/logo.png" alt="">
+                        <h2 class="brand-text mb-0">سامانه مانیتورینگ و تجمیع داده</h2>
+                    </a></li>
+                <li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i
+                            class="feather icon-x d-block d-xl-none font-medium-4 primary toggle-icon"></i></a></li>
+            </ul>
+        </div>
+        <div class="shadow-bottom"></div>
+        <div class="main-menu-content">
+            <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+
+
+                <li class=" nav-item active"><a href="index.html"><i class="feather  icon-home"></i><span
+                            class="menu-title" data-i18n="Email">داشبورد</span></a>
+                </li>
+                <li class=" nav-item"><a href="edit.html"><i class="feather icon-edit-1"></i><span class="menu-title"
+                            data-i18n="Chat">ویرایش</span></a>
+                </li>
+                <li class=" nav-item"><a href="statistics.html"><i class="feather icon-bar-chart-2"></i><span
+                            class="menu-title" data-i18n="Todo">آمار</span></a>
+                </li>
+                <li class=" nav-item"><a href="report.html"><i class="feather icon-clipboard"></i><span
+                            class="menu-title" data-i18n="Calender">گزارش</span></a>
+                </li>
+                <li class=" nav-item"><a href="setting.html"><i class="feather icon-settings"></i><span
+                            class="menu-title" data-i18n="Calender">تنظیمات</span></a>
+                </li>
+
+
+            </ul>
+        </div>
+    </div>
+    <!-- END: Main Menu-->
+
+    <!-- BEGIN: Content-->
+    <div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
+            </div>
+            <div class="content-body">
+                <!-- Dashboard Start -->
+                <section id="dashboard-analytics">
+
+                    <div class="row show-box">
+                        <div class="col-lg-3 col-sm-6 col-12">
+                            <div class="card bg-orange">
+                                <div class="card-header d-flex pb-0">
+                                    <div class="avatar bg-rgba-warning p-50 m-0">
+                                        <div class="avatar-content">
+                                            <i class="feather icon-eye text-warning font-medium-5"></i>
+                                        </div>
+                                    </div>
+                                    <p class="mb-0 fyekan txt">رکوردهای مشاهده شده</p>
+                                </div>
+
+                                <div class="card-body my-card-body" id="allObserved">
+                                    200
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 col-12">
+                            <div class="card bg-blue">
+                                <div class="card-header d-flex pb-0">
+                                    <div class="avatar bg-rgba-primary p-50 m-0">
+                                        <div class="avatar-content">
+                                            <i class="feather icon-edit text-primary font-medium-5"></i>
+                                        </div>
+                                    </div>
+                                    <p class="mb-0 fyekan txt">رکوردهای ویرایش شده</p>
+                                </div>
+
+                                <div class="card-body my-card-body" id="allEdited">
+                                    200
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 col-12">
+                            <div class="card bg-green">
+                                <div class="card-header d-flex pb-0">
+                                    <div class="avatar bg-rgba-success p-50 m-0">
+                                        <div class="avatar-content">
+                                            <i class="feather icon-check-square text-success font-medium-5"></i>
+                                        </div>
+                                    </div>
+                                    <p class="mb-0 fyekan txt">رکوردهای ارسال شده</p>
+                                </div>
+
+                                <div class="card-body my-card-body" id="allPoseted">
+                                    200
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-sm-6 col-12">
+                            <div class="card bg-red">
+                                <div class="card-header d-flex pb-0">
+                                    <div class="avatar bg-rgba-danger p-50 m-0">
+                                        <div class="avatar-content">
+                                            <i class="feather icon-trash-2 text-danger font-medium-5"></i>
+                                        </div>
+                                    </div>
+                                    <p class="mb-0 fyekan txt">رکوردهای حذف شده</p>
+                                </div>
+
+                                <div class="card-body my-card-body" id="allDeleted">
+                                    200
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-4 col-md-5 col-sm-12  col-12">
+                            <span class="title">
+                                فیلتر
+                            </span>
+                            <div class="card">
+
+                                <div class="card-body dashboard-filter">
+                                        <div class="form-group ">
+
+                                            <label for="first-name-vertical">کاربر :</label>
+
+                                            <select class="custom-select form-control fyekan w83" id="usersAcc">
+                                            </select>
+                                        </div>
+                                        <hr>
+                                        <div class="form-group ">
+                                            <label for="first-name-vertical">تاریخ :</label>
+                                            <div class=" list-group-filters font-medium-1">
+                                                <a time="today"
+                                                    class="btn-outline-primary list-group-item list-group-item-action active">
+                                                    امروز</a>
+                                                <a  time="Yesterday" class="btn-outline-primary list-group-item list-group-item-action">
+                                                    دیروز</a>
+                                                <a time="Month" class="btn-outline-primary list-group-item list-group-item-action">
+                                                    ماه گذشته</a>
+                                                <a time="Year" class="btn-outline-primary list-group-item list-group-item-action">
+                                                    سال گذشته</a>
+                                            </div>
+                                        </div>
+                                       
+                                        <button onclick="query()" class="fyekan btn bg-gradient-success mr-1 mb-1 waves-effect waves-light">اعمال
+                                            فیلتر</button>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-8 col-md-7 col-sm-12  col-12">
+                            <span class="title">
+                                نتایج
+                            </span>
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="col-lg-6 col-sm-6 col-12 float-right">
+                                        <div class="card br-orange">
+                                            <div class="card-header d-flex pb-0">
+                                                <div class="avatar bg-rgba-warning p-50 m-0">
+                                                    <div class="avatar-content">
+                                                        <i class="feather icon-eye text-warning font-medium-5"></i>
+                                                    </div>
+                                                </div>
+                                                <p class="mb-0 fyekan txt">رکوردهای مشاهده شده</p>
+                                            </div>
+
+                                            <div class="card-body my-card-body" id="observed">
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-sm-6 col-12 float-right">
+                                        <div class="card br-blue">
+                                            <div class="card-header d-flex pb-0">
+                                                <div class="avatar bg-rgba-primary p-50 m-0">
+                                                    <div class="avatar-content">
+                                                        <i class="feather icon-edit text-primary font-medium-5"></i>
+                                                    </div>
+                                                </div>
+                                                <p class="mb-0 fyekan txt">رکوردهای ویرایش شده</p>
+                                            </div>
+
+                                            <div class="card-body my-card-body" id="edited">
+                                            </div>
+                                            <div class="progress progress-bar-primary progress-lg">
+                                                <div class="progress-bar progress-bar-striped" id="perEdited" role="progressbar" aria-valuenow="40" aria-valuemin="40" aria-valuemax="100" style="width:0%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-sm-6 col-12 float-right">
+                                        <div class="card br-green">
+                                            <div class="card-header d-flex pb-0">
+                                                <div class="avatar bg-rgba-success p-50 m-0">
+                                                    <div class="avatar-content">
+                                                        <i class="feather icon-check-square text-success font-medium-5"></i>
+                                                    </div>
+                                                </div>
+                                                <p class="mb-0 fyekan txt">رکوردهای ارسال شده</p>
+                                            </div>
+
+                                            <div class="card-body my-card-body" id="posted">
+                                            </div>
+                                            <div class="progress progress-bar-success  progress-lg">
+                                                <div class="progress-bar progress-bar-striped" id="perPosted" role="progressbar" aria-valuenow="60" aria-valuemin="60" aria-valuemax="100" style="width:0%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-sm-6 col-12 float-right">
+                                        <div class="card br-red">
+                                            <div class="card-header d-flex pb-0">
+                                                <div class="avatar bg-rgba-danger p-50 m-0">
+                                                    <div class="avatar-content">
+                                                        <i class="feather icon-trash-2 text-danger font-medium-5"></i>
+                                                    </div>
+                                                </div>
+                                                <p class="mb-0 fyekan txt">رکوردهای حذف شده</p>
+                                            </div>
+
+                                            <div class="card-body my-card-body" id="delted">
+                                            </div>
+                                            <div class="progress progress-bar-danger  progress-lg">
+                                                <div class="progress-bar progress-bar-striped" id="perDeleted" role="progressbar" aria-valuenow="10" aria-valuemin="10" aria-valuemax="100" style="width:0%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <span class="title">
+                                نقشه قرار گیری دوربین ها در شهر
+                            </span>
+                           
+<div class="card">
+<div class="card-body" id="map">
+</div>
+</div> </div>
+                    </div>
+                </section>
+                <!-- Dashboard end -->
+
+            </div>
+        </div>
+    </div>
+    <!-- END: Content-->
+
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
+
+    <!-- BEGIN: Footer-->
+    <footer class="footer footer-static footer-light">
+        <p class="clearfix blue-grey lighten-2 mb-0"><span
+                class="float-md-left d-block d-md-inline-block mt-25">COPYRIGHT &copy; 2020<a
+                    class="text-bold-800 grey darken-2" href="#" target="_blank">Konect,</a>All rights Reserved</span>
+            <button class="btn btn-primary btn-icon scroll-top" type="button"><i
+                    class="feather icon-arrow-up"></i></button>
+        </p>
+    </footer>
+    <!-- END: Footer-->
+
+
+    <script src="../pr/app-assets/js/scripts/vendors.min.js"></script>
+    <script src="../pr/app-assets/js/scripts/app-menu.js"></script>
+    <script src="../pr/app-assets/js/scripts/app.js"></script>
+    <script src="../pr/app-assets/js/scripts/dashboard-analytics.js"></script>
+    
+
+    <script>
+        $(".todo-application .list-group-filters a").on('click', function () {
+            if ($('.todo-application .list-group-filters a').hasClass('active')) {
+                $('.todo-application .list-group-filters a').removeClass('active');
+            }
+            $(this).addClass("active");
+        });
+    </script>
+
+
+    <!--Script root-->
+    <script src="../pr/views/scripts/dashboardRoot.js"></script>
+    <script>
+        query();
+    </script>
+    <!--Script map-->
+    <script src="../pr/views/scripts/leaflet.js"></script>
+    <script src="../pr/views/scripts/map.js"></script>
+
+    <!-- END: Page JS-->
+
+</body>
+<!-- END: Body-->
+
+</html>
