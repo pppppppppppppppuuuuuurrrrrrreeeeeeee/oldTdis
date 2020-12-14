@@ -30,29 +30,29 @@ $.get( "./model/leaflet.php", function( data ) {
     for(let i = 0; i < cams.length; i++) {
         let cam = new LeafIcon({iconUrl: '../pr/views/imgs/blue.png'});
         let info = `
-    <div class="row">
-        <div class="col-sm-12">
-            <img src="../store/${cams[i][1].ImageAddress[0]}" style="width:300px; height: 200px;" />
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-3">
-            <span><b>Plate:</b> <br />
-            ${cams[i][1].PlateValue}</span>
-        </div>
-        <div class="col-sm-3">
-            <span><b>lane:</b> <br />
-            ${cams[i][1].Lane}</span>
-        </div>
-        <div class="col-sm-3">
-            <span><b>time:</b> <br />
-            ${cams[i][1].PassedTime}</span>
-        </div>
-        <div class="col-sm-3">
-            <span><b>type:</b> <br />
-            ${cams[i][1].VehicleType}</span>
-        </div>
-    </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <img src="../store/${cams[i][1].ImageAddress[0]}" style="width:300px; height: 200px;" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <span><b>Plate:</b> <br />
+                    ${cams[i][1].PlateValue}</span>
+                </div>
+                <div class="col-sm-3">
+                    <span><b>lane:</b> <br />
+                    ${cams[i][1].Lane}</span>
+                </div>
+                <div class="col-sm-3">
+                    <span><b>time:</b> <br />
+                    ${cams[i][1].PassedTime}</span>
+                </div>
+                <div class="col-sm-3">
+                    <span><b>type:</b> <br />
+                    ${cams[i][1].VehicleType}</span>
+                </div>
+            </div>
         `;
         L.marker([cams[i][0].latitude, cams[i][0].longitude], {icon: cam}).addTo(map).bindPopup(info);
     }
