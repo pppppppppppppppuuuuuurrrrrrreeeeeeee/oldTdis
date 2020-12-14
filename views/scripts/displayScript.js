@@ -25,21 +25,21 @@ var transParent = document.getElementsByClassName('transParent');
 var btn = document.getElementsByClassName('btn');
 
 ////////////////////socket client//////////////////
-var socket = io('http://192.168.98.162:3000');
-socket.on('connect', () => {
-    console.log('client connected !');
-    socket.on('recordId', (recordId) => {
-        sentIds.push(recordId);
-        vehicleInfo(vehicleIndex);
-        console.log(recordId);
-    });
-});
+// var socket = io('http://192.168.98.162:3000');
+// socket.on('connect', () => {
+//     console.log('client connected !');
+//     socket.on('recordId', (recordId) => {
+//         sentIds.push(recordId);
+//         vehicleInfo(vehicleIndex);
+//         console.log(recordId);
+//     });
+// });
 
 
 var policeStatus;
 $.ajax({
     type: "get",
-    url: "../../model/policeStatus.php",
+    url: "./model/policeStatus.php",
     async: false,
     success: function(data) {
         policeStatus = JSON.parse(data);
@@ -52,7 +52,7 @@ $.ajax({
 var policeStatusFake;
 $.ajax({
     type: "get",
-    url: "../../model/policeMessage.php",
+    url: "./model/policeMessage.php",
     async: false,
     success: function(data) {
         policeStatusFake = JSON.parse(data);
@@ -90,6 +90,15 @@ function readFile(imgAddr, plateAddr, callback) {
     };
     xhr.send();
 }
+
+$.get("./model/getCameraNames.php", function(data) {
+    data = JSON.parse(data);
+    for(let i = 0; i < data.length; i++) {
+        let cam = document.createElement('option');
+        cam.innerHTML = data[i].Name;
+        document.getElementById('cameras').appendChild(cam);
+    }
+});
 
 function sendPacket(url, packet, callback) {
     var xmlhttp = new XMLHttpRequest();
@@ -202,7 +211,7 @@ function maneeTaradod() {
 
 function sendToPolice() {
     console.log('soorat');
-    $.post("../../model/vehiclePoliceStatus.php", {
+    $.post("./model/vehiclePoliceStatus.php", {
         passId: document.getElementById('TDrecordID').innerText
     }, function(data, status) {
         if(data == "true") {
@@ -310,7 +319,7 @@ function createPacket(plateNo, packetStatus, callback) {
 
     $.ajax({
         type: "post",
-        url: "../../model/getCameraSendInfo.php",
+        url: "./model/getCameraSendInfo.php",
         async: false,
         data: {
             id: document.getElementById('TDcameraID').innerHTML
@@ -520,7 +529,7 @@ function reportRec(bt) {
                 status = elm.value
             }
         });
-        $.post("../../model/reportStatus.php",
+        $.post("./model/reportStatus.php",
         {
             id: recId,
             status: status
@@ -651,7 +660,7 @@ function submit() {
     }
 
 
-    $.post("../../model/readVehicles.php",
+    $.post("./model/readVehicles.php",
     {
         camera: camera,
         startDate: startDate,
@@ -889,7 +898,7 @@ function observe() {
     let id = document.getElementById('TDrecordID').innerText;
     let user = document.getElementById('user').value;
     let TDcameraID = document.getElementById('TDcameraID').innerText
-    $.post("../../model/observe.php",
+    $.post("./model/observe.php",
     {
         recordID: id,
         plate: plate,
@@ -913,7 +922,7 @@ function edit() {
     let id = document.getElementById('TDrecordID').innerText;
     let user = document.getElementById('user').value;
 
-    $.post("../../model/edit.php",
+    $.post("./model/edit.php",
     {
         recordID: id,
         plate: plate,
@@ -937,7 +946,7 @@ function deleteRec() {
     let id = document.getElementById('TDrecordID').innerText;
     let plate = document.getElementById('TDrecordPlate').innerText; 
     let user = document.getElementById('user').value;
-    $.post("../../model/delete.php",
+    $.post("./model/delete.php",
     {
         recordID: id,
         plate: plate,
@@ -965,13 +974,13 @@ function verify(){
     let camID = document.getElementById('TDcameraID').innerText;
 
     //send cameraID to multiserver
-    socket.emit('recordId', ID);
+    // socket.emit('recordId', ID);
 
     let speed = document.getElementById('TDspeed').innerText;
     let plate = document.getElementById('TDrecordPlate').innerText;
     let passedtime = document.getElementById('TDpassedTime').innerText;
     let imgAddress = queryVehilces[vehicleIndex].ImageAddress[0];
-    $.post("../../model/post.php",
+    $.post("./model/post.php",
     {
         ID: ID,
         camID: camID,

@@ -1,4 +1,3 @@
-<?php require_once __DIR__.'/controller/writeCameras.php' ?>
 <?php exec('node multiUser.js'); ?>
 <?php $username = filter_input(INPUT_POST, "username");
   if (!isset($_POST['username'])) {
@@ -36,7 +35,6 @@
   </div>
 
   <a onclick="changeCameraText(this)">تمام دوربین ها</a>
-  <?php writeCameras(); ?>
 </div>
   
 <div class="container">
