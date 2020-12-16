@@ -4,12 +4,6 @@ require_once 'config.php';
 date_default_timezone_set('Asia/Tehran');
 
 $recordID= filter_input(INPUT_POST, "ID");
-$camID= filter_input(INPUT_POST, "camID");
-$speed= filter_input(INPUT_POST, "speed");
-$plate= filter_input(INPUT_POST, "plate");
-$passedtime= filter_input(INPUT_POST, "passedtime");
-$imgAddress= filter_input(INPUT_POST, "imgAddress");
-$postTime = date('Y-m-d H:i:s');
 
 $f2 = false;
 

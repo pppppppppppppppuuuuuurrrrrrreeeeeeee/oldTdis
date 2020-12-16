@@ -43,7 +43,7 @@ $.ajax({
     async: false,
     success: function(data) {
         policeStatus = JSON.parse(data);
-        console.log(policeStatus);
+        // console.log(policeStatus);
     }
 }).fail(function(jqXHR, textStatus, error) {
     alert('request to policeStatus failed!');
@@ -56,7 +56,6 @@ $.ajax({
     async: false,
     success: function(data) {
         policeStatusFake = JSON.parse(data);
-        console.log(policeStatusFake);
     }
 }).fail(function(jqXHR, textStatus, error) {
     alert('request to policeStatusMeassage failed!');
@@ -96,6 +95,7 @@ $.get("./model/getCameraNames.php", function(data) {
     for(let i = 0; i < data.length; i++) {
         let cam = document.createElement('option');
         cam.innerHTML = data[i].Name;
+        cam.setAttribute('selected', 'selected');
         document.getElementById('cameras').appendChild(cam);
     }
 });
@@ -600,95 +600,101 @@ function getCurrentDate() {
 }
 
 function submit() {
-    let status = '';
-    let checkstatus = document.getElementById("notSendedsta").checked;
-    if(checkstatus)
-        status = 'NotSended';
-    else 
-        status = 'All';
-    let camera = document.getElementById("camera").value;
-    let startDate = document.getElementById("startDate").value;
-    let startTime = document.getElementById("startTime").value;
-    let endDate = document.getElementById("endDate").value;
-    let endTime = document.getElementById("endTime").value;
-    let accuracy = document.getElementById("accuracy").value;
+    let cameras = $("#cameras").val();
 
-    let speed = document.getElementById("speed").value;
-    let lightVehicle = 'off';
-    let heavyVehicle = 'off';
-    let unkownVehicle = 'off';
-    let wanted = 'off';
+    let startDate = document.getElementById('startDate').value;
+    let startTime = document.getElementById('startTime').value;
+    let endDate = document.getElementById('endDate').value;
+    let endTime = document.getElementById('endTime').value;
 
-    let lane0 = document.getElementById("lane0").checked;
+    let minSpeed = document.getElementById('connectedSlider').children[0].children[0].children[0].getAttribute('data-value');
+    let maxSpeed = document.getElementById('connectedSlider').children[0].children[1].children[0].getAttribute('data-value');
+
+    let minAcc = document.getElementById('connectedSlider2').children[0].children[0].children[0].getAttribute('data-value');
+    let maxAcc = document.getElementById('connectedSlider2').children[0].children[1].children[0].getAttribute('data-value');
+
+    let light = document.getElementById('light');
+    let heavy = document.getElementById('heavy');
+
+    if( ! (light.checked || heavy.checked) ) {
+        alert('شما باید حداقل یکی از دو کلاس خودرو را انتخاب کنید!');
+        return;
+    }
+
+    let types = [];
+    if(light.checked) {
+        types.push(1);
+    }
+    if(heavy.checked) {
+        types.push(2);
+    } 
+
     let lane1 = document.getElementById("lane1").checked;
     let lane2 = document.getElementById("lane2").checked;
     let lane3 = document.getElementById("lane3").checked;
+    let lane4 = document.getElementById("lane4").checked;
 
 
-    if( !(lane0 || lane1 || lane2 || lane3) ){
-        alert('You must select at least one lane!');
+    if( !(lane1 || lane2 || lane3 || lane4) ){
+        alert('شما باید حداقل یک لاین انتخاب کنید');
         return;
     }
+
     let lanes = [];
 
-    if(lane0)
-        lanes.push(0);
     if(lane1)
         lanes.push(1);
     if(lane2)
         lanes.push(2);
     if(lane3)
         lanes.push(3);
+    if(lane4)
+        lanes.push(4);
+    
+    // console.log(cameras);
+    // console.log(startDate);
+    // console.log(startTime);
+    // console.log(endDate);
+    // console.log(endTime);
 
-    if (document.getElementById("wanted").checked) {
-        wanted = 'on';
-    }
+    // console.log('speed');
+    // console.log(minSpeed);
+    // console.log(maxSpeed);
 
-    if (document.getElementById("lightVehicle").checked) {
-        lightVehicle = 'on';
-    }
-    if (document.getElementById("heavyVehicle").checked) {
-        heavyVehicle = 'on';
-    }
-    if (document.getElementById("unkownVehicle").checked) {
-        unkownVehicle = 'on';
-    }
+    // console.log('acc');
+    // console.log(minAcc);
+    // console.log(maxAcc);
 
-    if( !(document.getElementById("lightVehicle").checked || document.getElementById("heavyVehicle").checked || document.getElementById("unkownVehicle").checked) ){
-        alert('You must select at least one type of vehicle!');
-        return;
-    }
-
+    // console.log(lanes);
+    // console.log(types);
 
     $.post("./model/readVehicles.php",
     {
-        camera: camera,
+        cameras: JSON.stringify(cameras),
         startDate: startDate,
         startTime: startTime,
         endDate: endDate,
         endTime: endTime,
-        accuracy: accuracy,
-        lane: '(' + lanes.join(',') + ')',
-        speed: speed,
-        lightVehicle: lightVehicle,
-        heavyVehicle: heavyVehicle,
-        unkownVehicle: unkownVehicle,
-        wanted: wanted,
-        status: status
+        minAcc: minAcc,
+        maxAcc: maxAcc,
+        minSpeed: minSpeed,
+        maxSpeed: maxSpeed,
+        lanes: JSON.stringify(lanes),
+        types: JSON.stringify(types)
     },
     function(data,status){
-        console.log(data);
+        // console.log(data);
         queryVehilces = JSON.parse(data);
-        console.log( queryVehilces);
-
+        // console.log( queryVehilces);
         if( queryVehilces.length == 0 ) {
             alert('رکوردی در این بازه ی زمانی ثبت نشده است');
 
             document.getElementById('counterOf').innerHTML = `0 / 0`;
             document.getElementById('TDrecordID').innerHTML = '';
             document.getElementById('TDcameraID').innerHTML = '';
-            document.getElementById('TDrecordPlate').innerHTML = '';
+            // document.getElementById('TDrecordPlate').innerHTML = '';
             document.getElementById('TDpassedTime').innerHTML = '';
+            document.getElementById('TDpassedTimeShow').innerHTML = '';
             document.getElementById('TDlane').innerHTML = '';
             document.getElementById('TDspeed').innerHTML = '';
             document.getElementById('TDacc').innerHTML = '';
@@ -785,8 +791,13 @@ function vehicleInfo(index) {
 
     document.getElementById('TDrecordID').innerHTML = queryVehilces[index].ID;
     document.getElementById('TDcameraID').innerHTML = queryVehilces[index].CameraID;
-    document.getElementById('TDrecordPlate').innerHTML = queryVehilces[index].PlateValue;
+    // document.getElementById('TDrecordPlate').innerHTML = queryVehilces[index].PlateValue;
     document.getElementById('TDpassedTime').innerHTML = queryVehilces[index].PassedTime;
+    let TDpassedTimeShow = queryVehilces[index].PassedTime;
+    let dateTime = TDpassedTimeShow.split(' ');
+    let date = dateTime[0].split('-');
+    date = gregorian_to_jalali(parseInt(date[0]), parseInt(date[1]), parseInt(date[2]));
+    document.getElementById('TDpassedTimeShow').innerHTML = date + ' ' + dateTime[1];
     document.getElementById('TDlane').innerHTML = queryVehilces[index].Lane;
     document.getElementById('TDspeed').innerHTML = queryVehilces[index].Speed;
     document.getElementById('TDacc').innerHTML = queryVehilces[index].Accuracy;
@@ -796,10 +807,10 @@ function vehicleInfo(index) {
     document.getElementById('pelakImg').src = `http://192.168.98.162/store/${imgP}`;
 
     let pelak = queryVehilces[index].PlateValue;
-    document.getElementById('boxNumber1').value = convertToPersianNum(pelak.slice(0, 2));
+    document.getElementById('boxNumber1').value = (pelak.slice(0, 2));
     document.getElementById('boxNumber2').value = numToAlpha(parseInt(pelak.slice(2, 4)));
-    document.getElementById('boxNumber3').value = convertToPersianNum(pelak.slice(4, 7));
-    document.getElementById('boxNumber4').value = convertToPersianNum(pelak.slice(7, 9));
+    document.getElementById('boxNumber3').value = (pelak.slice(4, 7));
+    document.getElementById('boxNumber4').value = (pelak.slice(7, 9));
 
     observe();
 }
@@ -903,16 +914,14 @@ function observe() {
         recordID: id,
         plate: plate,
         userID: user,
-	TDcameraID: TDcameraID,
+	    TDcameraID: TDcameraID,
         status: 0
     },
     function(data,status){
-         console.log(data);
-        // if(data == 'true') {
-        //     alert('observed successfully!');
-        // } else {
-        //     alert(`there is a problem with this record ${data}`)
-        // }
+        //  console.log(data);
+        if(data != 'true') {
+            alert(`there is a problem with this record ${data}`)
+        }
     });
 }
 
@@ -971,30 +980,15 @@ function deleteRec() {
 
 function verify(){
     let ID = document.getElementById('TDrecordID').innerText;
-    let camID = document.getElementById('TDcameraID').innerText;
 
     //send cameraID to multiserver
     // socket.emit('recordId', ID);
 
-    let speed = document.getElementById('TDspeed').innerText;
-    let plate = document.getElementById('TDrecordPlate').innerText;
-    let passedtime = document.getElementById('TDpassedTime').innerText;
-    let imgAddress = queryVehilces[vehicleIndex].ImageAddress[0];
-    $.post("./model/post.php",
-    {
-        ID: ID,
-        camID: camID,
-        speed: speed,
-        plate: plate,
-        passedtime: passedtime,
-        imgAddress: imgAddress
-
+    $.post("./model/post.php", {
+        ID: ID
     },
-    function(data,status){
-        if(data == 'true') {
-            //alert('Record sent successfully!');
-        } else {
-            alert(data);
+    function(data){
+        if(data != 'true') {
             alert(`there is a problem ${data}`);
         }
     });

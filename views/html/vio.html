@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="author" content="PIXINVENT">
-    <title>صفحه ثبت تخلف</title>
+    <title>ثبت تخلف</title>
 
     <!-- BEGIN: Vendor CSS-->
     <link rel="stylesheet" type="text/css" href="../pr/app-assets/vendors/css/vendors-rtl.min.css">
@@ -21,24 +21,6 @@
     <link rel="stylesheet" type="text/css" href="../pr/app-assets/css-rtl/custom-rtl.css">
     <link type="text/css" rel="stylesheet" href="../pr/app-assets/css-rtl/datetimepicker.min.css" />
     <!-- END: Custom CSS-->
-
-    <style>
-        .redddd {
-            background-color: #be573d;
-            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f4f4f4', endColorstr='#eeeeee', GradientType=0 );
-            background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(20%, #f4f4f4), color-stop(50%, #f0f0f0), color-stop(52%, #e8e8e8), color-stop(100%, #eeeeee));
-            background-image: -webkit-linear-gradient(top, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eeeeee 100%);
-            background-image: -moz-linear-gradient(top, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eeeeee 100%);
-            background-image: -o-linear-gradient(top, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eeeeee 100%);
-            background-image: -ms-linear-gradient(top, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eeeeee 100%);
-            background-image: linear-gradient(top, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eeeeee 100%);
-            -webkit-box-shadow: 0 0 2px #ffffff inset, 0 1px 0 rgba(0,0,0,0.05);
-            -moz-box-shadow: 0 0 2px #ffffff inset, 0 1px 0 rgba(0,0,0,0.05);
-            box-shadow: 0 0 2px #ffffff inset, 0 1px 0 rgba(0,0,0,0.05);
-            color: #333;
-            border: 1px solid #aaaaaa;
-}
-    </style>
 </head>
 <!-- END: Head-->
 
@@ -164,17 +146,16 @@
                             <div class="card" id="myDIV2">
 
                                 <div class="card-body">
-                                    <form action="">
                                         <div class="form-group">
 
                                             <div class="col-lg-4 col-md-6 col-sm-12 float-right dflex">
                                                 <label for="first-name-vertical">کاربر :</label>
 
-                                                <input type="text" class="form-control fyekan" id="readonlyInput" readonly="readonly" value="{username}" id="user" name="user">
+                                                <input id="user" type="text" class="form-control fyekan" id="readonlyInput" readonly="readonly" value="{username}" id="user" name="user">
                                             </div>
                                             <div class="col-lg-4 col-md-6 col-sm-12 float-right dflex">
                                                 <label for="first-name-vertical">از تاریخ :</label>
-                                                <input type="text" id="startDate" class="pCalender">
+                                                <input type="text" id="startDate" class="pCalender" autocomplete="off">
 
                                             </div>
                                             <div class="col-lg-4 col-md-6 col-sm-12 float-right mtime dflex">
@@ -186,11 +167,12 @@
                                                 <label for="first-name-vertical">دوربین ها :</label>
 
                                                 <select id="cameras" class="form-control input-sm select2-multiple" multiple>
+
                                                 </select>
                                             </div>
                                             <div class="col-lg-4 col-md-6 col-sm-12 float-right dflex">
                                                 <label for="first-name-vertical">تا تاریخ :</label>
-                                                <input type="text" id="endDate" class="pCalender">
+                                                <input type="text" id="endDate" class="pCalender" autocomplete="off">
 
 
                                             </div>
@@ -248,22 +230,14 @@
                                                 <label for="first-name-vertical">نوع ماشین :</label>
 
                                                 <div class="custom-control custom-checkbox">
-
-                                                    <input type="checkbox" class="custom-control-input" checked=""
-                                                        name="customCheck" id="customCheck2">
-                                                    <label class="custom-control-label" for="customCheck2">سبک</label>
+                                                    <input type="checkbox" class="custom-control-input" checked="" name="light" id="light">
+                                                    <label class="custom-control-label" for="light">سبک</label>
                                                 </div>
                                                 <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input"
-                                                        name="customCheck" id="customCheck3">
-                                                    <label class="custom-control-label" for="customCheck3">سنگین</label>
+                                                    <input type="checkbox" class="custom-control-input" checked="" name="heavy" id="heavy">
+                                                    <label class="custom-control-label" for="heavy">سنگین</label>
                                                 </div>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input"
-                                                        name="customCheck" id="customCheck1">
-                                                    <label class="custom-control-label" for="customCheck1">موارد
-                                                        دیگر</label>
-                                                </div>
+                                        
                                             </div>
                                             <div class="offset-md-1">
                                             </div>
@@ -271,37 +245,28 @@
                                                 <label for="first-name-vertical">لاین:</label>
 
                                                 <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" checked="" name="lane1" id="lane1">
+                                                    <label class="custom-control-label" for="lane1">1</label>
+                                                </div>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" checked="" name="lane2" id="lane2">
+                                                    <label class="custom-control-label" for="lane2">2</label>
+                                                </div>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" checked="" name="lane3" id="lane3">
+                                                    <label class="custom-control-label" for="lane3">3</label>
+                                                </div>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" checked="" name="lane4" id="lane4">
 
-                                                    <input type="checkbox" class="custom-control-input" checked=""
-                                                        name="customCheck" id="fcustomCheck1">
-                                                    <label class="custom-control-label" for="fcustomCheck1">1</label>
-                                                </div>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input"
-                                                        name="customCheck" id="fcustomCheck2">
-                                                    <label class="custom-control-label" for="fcustomCheck2">2</label>
-                                                </div>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input"
-                                                        name="customCheck" id="fcustomCheck3">
-                                                    <label class="custom-control-label" for="fcustomCheck3"> 3</label>
-                                                </div>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input"
-                                                        name="customCheck" id="fcustomCheck4">
-                                                    <label class="custom-control-label" for="fcustomCheck4"> 4</label>
+                                                    <label class="custom-control-label" for="lane4">4</label>
                                                 </div>
 
                                             </div>
                                         </div>
                                         <div class="center">
-                                            <button type="submit"
-                                                class="fyekan btn bg-gradient-success mr-1 mb-1 waves-effect waves-light w1">اعمال
-                                                فیلتر</button>
-
+                                            <button onclick="submit()" class="fyekan btn bg-gradient-success mr-1 mb-1 waves-effect waves-light w1">اعمال فیلتر</button>
                                         </div>
-
-                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -319,27 +284,27 @@
                                             <div class="carousel-inner" role="listbox">
                                                 <!--First slide-->
                                                 <div class="carousel-item active">
-                                                    <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(129).jpg"  width="700" height="520" alt="Second slide">
+                                                    <img id="primaryImg" class="d-block w-100" src="./views/imgs/No Image.png"  width="700" height="520">
                                                 </div>
                                                 <!--/First slide-->
                                             </div>
 
-                                            <a onclick="console.log('prev');" class="carousel-control-prev" href="#carousel-example-1z" role="button" data-slide="prev">
+                                            <a onclick="change('p')" class="carousel-control-prev" role="button" data-slide="prev">
                                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                             <span class="sr-only">Previous</span>
                                             </a>
-                                            <a onclick="console.log('next');" class="carousel-control-next" href="#carousel-example-1z" role="button" data-slide="next">
+                                            <a onclick="change('n')" class="carousel-control-next" role="button" data-slide="next">
                                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                             <span class="sr-only">Next</span>
                                             </a>
                                             <!--/.Controls-->
                                         </div>
 
-                                        <p class="owlnum"><span>شماره عکس:</span> <span> 200</span>/ <span>4</span> </p>
+                                        <p class="owlnum"><span>شماره تصویر:</span> <span id="counterOf" dir="ltr">4 / 200</span> </p>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12 float-right ">
                                         <div class="form-group">
-                                            <img src="../pr/app-assets/images/pages/pelak.jpg" alt="">
+                                            <img src="./views/imgs/No Tag.png" id="pelakImg" style="width: 200px; height: 60px;" alt="">
                                         </div>
                                         <form action="" class="needs-validation" novalidate>
                                             <div class="form-group editInput">
@@ -348,7 +313,7 @@
                                                         <span><img src="../pr/app-assets/images/pages/iran.jpg"
                                                                 alt=""></span>
                                                         <input  type="number" maxlength="2"
-                                                            class="form-control justNum" id="1" required value="10" 
+                                                            class="form-control justNum" id="boxNumber4" required value="" 
                                                             oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                                                              pattern="[0-9]{2}"
                                                             >
@@ -357,19 +322,19 @@
                                                               </div>
                                                     </div>
 
-                                                    <input type="number" class="form-control w25 justNum" id="2" required
-                                                        value="698"  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                                    <input type="number" class="form-control w25 justNum" id="boxNumber3" required
+                                                        value=""  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                                                          maxlength="3" oninvalid="setCustomValidity('فیلد را پر کنید')" >
                                                          <div class="invalid-tooltip">
                                                             لطفا فیلد را پر کنید
                                                         </div>
-                                                    <input type="text" class="form-control w25" id="farsiIn"  required
-                                                           maxlength="1" value="د" 
+                                                    <input type="text" class="form-control w25" id="boxNumber2"  required
+                                                           maxlength="1" value="" 
                                                              oninvalid="setCustomValidity('فیلد را تنها با حرف  پر کنید')"> 
 
                                                     <div class="edit-input-inner w25 df">
-                                                        <input type="number" class="form-control justNum" id="4" required
-                                                            value="23"   
+                                                        <input type="number" class="form-control justNum" id="boxNumber1" required
+                                                            value=""   
                                                             oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                                                             maxlength="2"   >
                                                             <div class="invalid-tooltip">
@@ -393,8 +358,7 @@
                                             </div>
                                             <div class="form-group btn-record">
 
-                                                <button type="button"
-                                                    class="btn btn-outline-success   mb-1 waves-effect waves-light">ارسال
+                                                <button id="btnPolice" type="button" class="btn btn-outline-success mb-1 waves-effect waves-light">ارسال
                                                     به
                                                     پلیس</button>
                                             </div>
@@ -463,38 +427,23 @@
                                                     <thead>
                                                         <tr>
                                                             <th scope="col">رکورد</th>
-                                                            <th scope="col">دوربین</th>
-                                                            <th scope="col">زمان قبل</th>
-                                                            <th scope="col">خط </th>
+                                                            <th scope="col">شناسه دوربین</th>
+                                                            <th scope="col">زمان</th>
+                                                            <th scope="col">لاین</th>
                                                             <th scope="col">سرعت </th>
-                                                            <th scope="col">دفت </th>
+                                                            <th scope="col">دقت </th>
 
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         <tr>
-                                                            <th scope="row">1</th>
-                                                            <td>4</td>
-                                                            <td>80</td>
-                                                            <td>4</td>
-                                                            <td>80</td>
-                                                            <td>80</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">2</th>
-                                                            <td>1</td>
-                                                            <td>80</td>
-                                                            <td>4</td>
-                                                            <td>80</td>
-                                                            <td>80</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>1</td>
-                                                            <td>80</td>
-                                                            <td>1</td>
-                                                            <td>90</td>
-                                                            <td>80</td>
-                                                            <td>80</td>
+                                                            <td id="TDrecordID"></td>
+                                                            <td id="TDcameraID"></td>
+                                                            <td dir="ltr" id="TDpassedTime" style="display: none;"></td>
+                                                            <td dir="ltr" id="TDpassedTimeShow"></td>
+                                                            <td id="TDlane"></td>
+                                                            <td id="TDspeed"></td>
+                                                            <td id="TDacc"></td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -572,7 +521,7 @@
 
             noUiSlider.create(connectedSlider, {
                 animationDuration: 300,
-                start: [80, 250],
+                start: [70, 250],
                 step: 1,
                 connect: true,
                 range: {
@@ -626,26 +575,7 @@
     <!-- calander -->
     <script src="../pr/app-assets/js/scripts/kamadatepicker.js"></script>
 
-    <script>
-        var customOptions = {
-            placeholder: "روز / ماه / سال",
-            twodigit: false,
-            closeAfterSelect: false,
-            nextButtonIcon: "fa fa-arrow-circle-right",
-            previousButtonIcon: "fa fa-arrow-circle-left",
-            buttonsColor: "blue",
-            forceFarsiDigits: true,
-            markToday: true,
-            markHolidays: true,
-            highlightSelectedDay: true,
-            sync: true,
-            gotoToday: true,
-            closeAfterSelect: true
-        }
-        kamaDatepicker('startDate', customOptions);
-        kamaDatepicker('endDate', customOptions);
 
-    </script>
 
     <!-- time -->
     <script src="../pr/app-assets/js/scripts/moment.min.js"></script>
@@ -656,11 +586,11 @@
 
 
             /* setting time */
-            $("#timepicker1").datetimepicker({
+            $("#startTime").datetimepicker({
                 format: "HH:mm"
 
             });
-            $("#timepicker").datetimepicker({
+            $("#endTime").datetimepicker({
                 format: "HH:mm"
 
             });
@@ -726,18 +656,24 @@ $(function () {
 <script src="./views/scripts/displayScript.js"></script>
 <!-- <script src="./views/scripts/cameraRefresh.js"></script> -->
 <script>
-        kamaDatepicker('startDate',  {
-		buttonsColor: "red",
-		markToday: true,
-		markHolidays: true,
-		sync: true
-        });
-        kamaDatepicker('endDate',  {
-            buttonsColor: "red",
+
+        var customOptions = {
+            placeholder: "روز / ماه / سال",
+            twodigit: false,
+            closeAfterSelect: false,
+            nextButtonIcon: "fa fa-arrow-circle-right",
+            previousButtonIcon: "fa fa-arrow-circle-left",
+            buttonsColor: "blue",
+            forceFarsiDigits: true,
             markToday: true,
             markHolidays: true,
-            sync: true
-        });
+            highlightSelectedDay: true,
+            sync: true,
+            gotoToday: true,
+            closeAfterSelect: true
+        }
+        kamaDatepicker('startDate', customOptions);
+        kamaDatepicker('endDate', customOptions);
 
         var startDate = getNPassedDate(1);
         var stopDate = getCurrentDate();
