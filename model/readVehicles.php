@@ -69,7 +69,7 @@ lab;
     }
     // var_dump($edited).PHP_EOL;
     foreach($edited as &$item) {
-        $json[$item['passedVehicleRecordID']]['PlateValue'] = $item['editedPlate'];
+        $json[$item['passedVehicleRecordID']]['MasterPlateValue'] = $item['editedPlate'];
     }
 
     $jsonArray = [];

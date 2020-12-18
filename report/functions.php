@@ -115,7 +115,7 @@ function Report($sql, $columns) {
                 else if($head == "ImageAddress") {
                     $veh = $src = $row[$head];
                     $src = str_replace("I.jpg", "P.jpg", $src);
-                    $alt = $row['PlateValue'];
+                    $alt = $row['MasterPlateValue'];
                     $tr .= "
                     <td>
                         <img style=\"width:200px; height:60px;\" src =\"http://192.168.98.162/store/$src\" alt=\"$alt\" onclick=\"window.open(this.src)\" />
@@ -127,7 +127,7 @@ function Report($sql, $columns) {
                     </td>
                     ";
                 }                
-                else if($head == "PlateValue" or $head == 'editedPlate') {
+                else if($head == "MasterPlateValue" or $head == 'editedPlate') {
                     $val = $row[$head];
                     $twoFirstNum = toPersianNum(substr($val, 0, 2));
                     $harf = harfConvertor(substr($val, 2, 2));
@@ -242,11 +242,11 @@ function ReportZip($sql, $columns) {
                     $vehName = $vehName[count($vehName) - 1];
                     copy("/var/www/html/store/$src", $plateName);
                     copy("/var/www/html/store/$veh", $vehName);
-                    $alt = $row['PlateValue'];
+                    $alt = $row['MasterPlateValue'];
                     $tr .= "<td><img style=\"width:200px; height:60px;\" src =\"./data/$plateName\" onclick=\"window.open(this.src)\" alt=\"$alt\" /></td>";
                     $tr .= "<td><img style=\"width:200px; height:100px;\" src =\"./data/$vehName\" onclick=\"window.open(this.src)\" alt=\"$alt\" /></td>";
                 }                
-                else if($head == "PlateValue" or $head == 'editedPlate') {
+                else if($head == "MasterPlateValue" or $head == 'editedPlate') {
                     $val = $row[$head];
                     $twoFirstNum = toPersianNum(substr($val, 0, 2));
                     $harf = harfConvertor(substr($val, 2, 2));

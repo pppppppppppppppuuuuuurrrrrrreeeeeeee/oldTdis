@@ -16,7 +16,7 @@ if( $result-> num_rows > 0) {
 $infos = [];
 foreach($cams as &$cam) {
     $deviceId = $cam['DeviceID'];
-    $sql = "SELECT PlateValue, Lane, PassedTime, VehicleType, ImageAddress FROM `PassedVehicleRecords` WHERE CameraID = $deviceId ORDER BY ID DESC LIMIT 1";
+    $sql = "SELECT MasterPlateValue, Lane, PassedTime, VehicleType, ImageAddress FROM `PassedVehicleRecords` WHERE CameraID = $deviceId ORDER BY ID DESC LIMIT 1";
     $result = $conn->query($sql);
     if($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {

@@ -3,7 +3,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "Anpr@1234";
-$dbname = "MonitoringAnpr";
+$dbname = "Aggregation";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 $conn->set_charset("utf8");

@@ -492,14 +492,14 @@ function readStateTags() {
 
 function calculateAllRecives() {
     global $conn, $stateAndTags, $statesAndAllRecivesCounts, $startDate, $startTime, $endDate, $endTime;
-    $sql = "SELECT PlateValue FROM PassedVehicleRecords WHERE PassedTime >= '$startDate $startTime' AND PassedTime <= '$endDate $endTime'";
+    $sql = "SELECT MasterPlateValue FROM PassedVehicleRecords WHERE PassedTime >= '$startDate $startTime' AND PassedTime <= '$endDate $endTime'";
     $result = $conn->query($sql);
 
     ChromePhp::log($sql);
 
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
-            $lastTwoNum = substr($row['PlateValue'], -2);
+            $lastTwoNum = substr($row['MasterPlateValue'], -2);
             $flag = false;
             foreach($stateAndTags as &$stateNtag) {
                 if($flag)

@@ -187,7 +187,7 @@ else if ($status == 'PassedVehicleRecords')
     $lanesQuery
     $dirQuery
     $vehQuery
-    AND PlateValue LIKE '$plate'";
+    AND MasterPlateValue LIKE '$plate'";
 
     $sqlCount = str_replace('{?}', 'COUNT(*)', $sql);
     if($boll == 'false') 
@@ -384,7 +384,7 @@ else if ($status == 'innerJoin')
         $lanesQuery
         $dirQuery
         $vehQuery
-        AND PlateValue LIKE '$plate'";
+        AND MasterPlateValue LIKE '$plate'";
         
     $sqlCamera = str_replace('{?}', $cols, $sqlCamera);
     
@@ -665,7 +665,7 @@ else if($status == "PassedVehicleRecordsZip") {
     $lanesQuery
     $dirQuery
     $vehQuery
-    AND PlateValue LIKE '$plate'";
+    AND MasterPlateValue LIKE '$plate'";
 
     $sqlCount = str_replace('{?}', 'COUNT(*)', $sql);
     if($boll == 'false') 
@@ -860,7 +860,7 @@ else if($status == 'innerJoinZip') {
         $lanesQuery
         $dirQuery
         $vehQuery
-        AND PlateValue LIKE '$plate'";
+        AND MasterPlateValue LIKE '$plate'";
         
     $sqlCamera = str_replace('{?}', $cols, $sqlCamera);
     

@@ -210,7 +210,7 @@ if($cameraDataBase == 'true') {
     $plate = filter_input(INPUT_POST, "plate");
     $queryPlate = '';
     if($plate != 'undefined')
-        $queryPlate = "PlateValue = $plate AND ";
+        $queryPlate = "MasterPlateValue = $plate AND ";
 
     $whiteList = filter_input(INPUT_POST, "whiteList");
 

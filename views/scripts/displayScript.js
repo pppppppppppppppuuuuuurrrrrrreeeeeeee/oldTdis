@@ -8,7 +8,7 @@ vehicle.ID = null;
 vehicle.ImageAddress = null;
 vehicle.Lane = null;
 vehicle.PassedTime = null;
-vehicle.PlateValue = null;
+vehicle.MasterPlateValue = null;
 vehicle.ProcessedFrames = null;
 vehicle.Speed = null;
 vehicle.Suspicious = null;
@@ -172,7 +172,7 @@ function maneeTaradod() {
     let Alphabet = document.getElementById("boxNumber2").value;
     let ThreeNum =convertToEnglishNum(document.getElementById("boxNumber3").value);
     let TwoLastNum = convertToEnglishNum(document.getElementById("boxNumber4").value);
-    let PlateValue = document.getElementById('TDrecordPlate').innerText;
+    let MasterPlateValue = document.getElementById('TDrecordPlate').innerText;
 
     let Pre = "";
     if (Alphabet == "الف")
@@ -200,7 +200,7 @@ function maneeTaradod() {
             alert(val);
         } else {
             let Edited = 0;
-            if (PlateNo != PlateValue) {
+            if (PlateNo != MasterPlateValue) {
                 Edited = 1;
             }
             change('n');
@@ -253,7 +253,7 @@ function sendToPolice() {
     let Alphabet = document.getElementById("boxNumber2").value;
     let ThreeNum =convertToEnglishNum(document.getElementById("boxNumber3").value);
     let TwoLastNum = convertToEnglishNum(document.getElementById("boxNumber4").value);
-    let PlateValue = document.getElementById('TDrecordPlate').innerText;
+    let MasterPlateValue = document.getElementById('TDrecordPlate').innerText;
     
     let speedch = document.getElementById('TDspeed').innerText;
     if(speedch < 70) {
@@ -287,7 +287,7 @@ function sendToPolice() {
             alert(val);
         } else {
             let Edited = 0;
-            if (PlateNo != PlateValue) {
+            if (PlateNo != MasterPlateValue) {
                 Edited = 1;
             }
             sentIds.push(document.getElementById('TDrecordID').innerText);
@@ -515,36 +515,26 @@ function alphaToNumPolice(alpha) {
 }
 
 
-function reportRec(bt) {
-    if(bt.innerText == 'Report Record'){
-        document.querySelector('#reportRecords').style.display = '';
-        bt.innerText = 'Send Report';
-    } else {
-        //update status
-        let recId = document.getElementById('TDrecordID').innerText;
-        let statuses = Array.from(document.getElementsByName('reposrtStatus'));
-        let status;
-        statuses.forEach(elm => {
-            if(elm.checked) {
-                status = elm.value
-            }
-        });
-        $.post("./model/reportStatus.php",
-        {
-            id: recId,
-            status: status
-        },
-        function(data,status){
-            if(data =="true"){
-                alert('Your report sent successfully')
-            } else {
-                alert('there is a problem with this record!');
-            }
-        });
-
-        document.querySelector('#reportRecords').style.display = 'none';
-        bt.innerText = 'Report Record';
+function reportRec() {
+    let recId = document.getElementById('TDrecordID').innerText;
+    let customRadio = document.getElementsByName('customRadio');
+    let status = 'موارد دیگر';
+    for(let i = 0; i < customRadio.length; i++) {
+        if(customRadio[i].checked) {
+            status = customRadio[i].getAttribute('status');
+        }
     }
+    $.post("./model/reportStatus.php", {
+        id: recId,
+        status: status
+    },
+    function(data) {
+        if(data =="true"){
+            alert('Your report sent successfully')
+        } else {
+            alert('there is a problem with this record!');
+        }
+    });
 }
 
 function changeCameraText(anchor) {
@@ -791,7 +781,7 @@ function vehicleInfo(index) {
 
     document.getElementById('TDrecordID').innerHTML = queryVehilces[index].ID;
     document.getElementById('TDcameraID').innerHTML = queryVehilces[index].CameraID;
-    // document.getElementById('TDrecordPlate').innerHTML = queryVehilces[index].PlateValue;
+    // document.getElementById('TDrecordPlate').innerHTML = queryVehilces[index].MasterPlateValue;
     document.getElementById('TDpassedTime').innerHTML = queryVehilces[index].PassedTime;
     let TDpassedTimeShow = queryVehilces[index].PassedTime;
     let dateTime = TDpassedTimeShow.split(' ');
@@ -806,7 +796,7 @@ function vehicleInfo(index) {
     document.getElementById('primaryImg').src = `http://192.168.98.162/store/${imgI}`;
     document.getElementById('pelakImg').src = `http://192.168.98.162/store/${imgP}`;
 
-    let pelak = queryVehilces[index].PlateValue;
+    let pelak = queryVehilces[index].MasterPlateValue;
     document.getElementById('boxNumber1').value = (pelak.slice(0, 2));
     document.getElementById('boxNumber2').value = numToAlpha(parseInt(pelak.slice(2, 4)));
     document.getElementById('boxNumber3').value = (pelak.slice(4, 7));
@@ -919,9 +909,9 @@ function observe() {
     },
     function(data,status){
         //  console.log(data);
-        if(data != 'true') {
-            alert(`there is a problem with this record ${data}`)
-        }
+        // if(data != 'true') {
+        //     alert(`there is a problem with this record ${data}`)
+        // }
     });
 }
 
@@ -942,18 +932,18 @@ function edit() {
         // console.log(data);
         if(data == 'true') {
             alert('Record edited successfully!');
-            queryVehilces[vehicleIndex].PlateValue = plate;
+            queryVehilces[vehicleIndex].MasterPlateValue = plate;
         } else {
             alert('there is a problem with this record');
         }
         vehicleInfo(vehicleIndex);
     });
-    reject();
+    // reject();
 }
 
 function deleteRec() {
     let id = document.getElementById('TDrecordID').innerText;
-    let plate = document.getElementById('TDrecordPlate').innerText; 
+    let plate = readPlate();
     let user = document.getElementById('user').value;
     $.post("./model/delete.php",
     {

@@ -38,7 +38,7 @@ $.get( "./model/leaflet.php", function( data ) {
             <div class="row">
                 <div class="col-sm-3">
                     <span><b>Plate:</b> <br />
-                    ${cams[i][1].PlateValue}</span>
+                    ${cams[i][1].MasterPlateValue}</span>
                 </div>
                 <div class="col-sm-3">
                     <span><b>lane:</b> <br />

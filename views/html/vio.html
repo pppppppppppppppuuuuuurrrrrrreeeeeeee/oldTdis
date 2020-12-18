@@ -306,7 +306,6 @@
                                         <div class="form-group">
                                             <img src="./views/imgs/No Tag.png" id="pelakImg" style="width: 200px; height: 60px;" alt="">
                                         </div>
-                                        <form action="" class="needs-validation" novalidate>
                                             <div class="form-group editInput">
                                                 <div class="input-group border-group">
                                                     <div class="edit-input-inner w25">
@@ -348,9 +347,9 @@
                                             </div>
                                             <div class="form-group btn-record">
 
-                                                <button type="submit" id="myButton" 
+                                                <button type="submit" id="myButton" onclick="edit()"
                                                     class="btn btn-outline-primary mb-1 waves-effect waves-light">ویرایش</button>
-                                                <button type="button" 
+                                                <button type="button" onclick="deleteRec()"
                                                     class="btn btn-outline-danger  mb-1 waves-effect waves-light">حذف</button>
 
 
@@ -362,57 +361,47 @@
                                                     به
                                                     پلیس</button>
                                             </div>
-                                        </form>
                                         <hr>
                                         <div class="form-group">
-                                            <form action="" class="w100">
                                                 <span class="title">
                                                     گزارش رکورد
                                                 </span>
                                                 <div class="btn-record2">
                                                     <div class="custom-control custom-radio">
-                                                        <input type="radio" class="custom-control-input"
-                                                            name="customRadio" id="li1" checked="">
+                                                        <input type="radio" class="custom-control-input" status="پلاک کم نور" name="customRadio" id="li1" checked="">
                                                         <label class="custom-control-label" for="li1">
                                                             پلاک کم نور
                                                         </label>
                                                     </div>
                                                     <div class="custom-control custom-radio">
-                                                        <input type="radio" class="custom-control-input"
-                                                            name="customRadio" id="li2" checked="">
+                                                        <input type="radio" class="custom-control-input" status="پلاک پر نور" name="customRadio" id="li2" checked="">
                                                         <label class="custom-control-label" for="li2">پلاک پر نور
                                                         </label>
                                                     </div>
                                                     <div class="custom-control custom-radio">
-                                                        <input type="radio" class="custom-control-input"
-                                                            name="customRadio" id="mcustomRadio1" checked="">
+                                                        <input type="radio" class="custom-control-input" status="تصویر پر نور" name="customRadio" id="mcustomRadio1" checked="">
                                                         <label class="custom-control-label" for="mcustomRadio1">
                                                             تصویر پر نور</label>
                                                     </div>
                                                     <div class="custom-control custom-radio">
-                                                        <input type="radio" class="custom-control-input"
-                                                            name="customRadio" id="li3" checked="">
+                                                        <input type="radio" class="custom-control-input" status="تصویر کم نور" name="customRadio" id="li3" checked="">
                                                         <label class="custom-control-label" for="li3">تصویر کم نور
                                                         </label>
                                                     </div>
                                                     <div class="custom-control custom-radio">
-                                                        <input type="radio" class="custom-control-input"
-                                                            name="customRadio" id="li4" checked="">
+                                                        <input type="radio" class="custom-control-input" status="پلاک ناواضح" name="customRadio" id="li4" checked="">
                                                         <label class="custom-control-label" for="li4">پلاک ناواضح
                                                             </label>
                                                     </div>
 
                                                     <div class="custom-control custom-radio">
-                                                        <input type="radio" class="custom-control-input"
-                                                            name="customRadio" id="li5" checked="">
+                                                        <input type="radio" class="custom-control-input" status="موارد دیگر" name="customRadio" id="li5" checked="">
                                                         <label class="custom-control-label" for="li5">موارد
                                                             دیگر</label>
                                                     </div>
 
                                                 </div>
-                                                <button type="submit"
-                                                    class="btn btn-outline-danger  mb-1 waves-effect waves-light editbtn">ارسال</button>
-                                            </form>
+                                                <button type="submit" onclick="reportRec()" class="btn btn-outline-danger  mb-1 waves-effect waves-light editbtn">ارسال</button>
                                         </div>
 
                                     </div>

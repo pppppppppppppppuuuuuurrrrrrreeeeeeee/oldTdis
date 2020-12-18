@@ -74,21 +74,6 @@ function getIDsByStates() {
     return $all;
 }
 
-function getIRMapData() {
-    // global $conn;
-    // $sql = "SELECT * FROM States";
-    // $res = $conn->query($sql);
-    // $allStates = [];
-    // while( $row = $res->fetch_assoc() ) {
-    //     $allStates[] = [$row['state'], $row['codes']];
-    // }
-    // $stateCounts = [];
-    // foreach($allStates as &$state) {
-    //     $sql = "SELECT PlateValue "
-    // }
-}
-
-
 
 function getCameraID($name){
   global $conn;

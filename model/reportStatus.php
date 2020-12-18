@@ -17,7 +17,7 @@ if ($status == 'تصویر پر نور'){
     $statusint = 13;
 } elseif ($status == 'پلاک ناواضح') {
     $statusint = 14;
-} elseif ($status == 'سایر ...') {
+} elseif ($status == 'موارد دیگر') {
     $statusint = 15;
 }
 

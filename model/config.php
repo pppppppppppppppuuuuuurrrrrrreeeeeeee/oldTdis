@@ -1,7 +1,7 @@
 <?php
 $host = "localhost";
 $username = "root";
-$database = "MonitoringAnpr";
+$database = "Aggregation";
 $password = "Anpr@1234";
 
 // Create connection
