@@ -17,11 +17,11 @@ function writeLogin($flag = true) {
     <title>ورود به سامانه</title>
 
     <!-- BEGIN: Vendor CSS-->
-    <link rel="stylesheet" type="text/css" href="../pr/app-assets/vendors/css/vendors-rtl.min.css">
-    <link rel="stylesheet" type="text/css" href="../pr/app-assets/css-rtl/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="../pr/app-assets/css-rtl/bootstrap-extended.css">
-    <link rel="stylesheet" type="text/css" href="../pr/app-assets/css-rtl/components.css">
-    <link rel="stylesheet" type="text/css" href="../pr/app-assets/css-rtl/custom-rtl.css">
+    <link rel="stylesheet" type="text/css" href="../app-assets/vendors/css/vendors-rtl.min.css">
+    <link rel="stylesheet" type="text/css" href="../app-assets/css-rtl/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../app-assets/css-rtl/bootstrap-extended.css">
+    <link rel="stylesheet" type="text/css" href="../app-assets/css-rtl/components.css">
+    <link rel="stylesheet" type="text/css" href="../app-assets/css-rtl/custom-rtl.css">
 
 </head>
 <!-- END: Head-->
@@ -42,7 +42,7 @@ function writeLogin($flag = true) {
                         <div class="card bg-authentication rounded-0 mb-0">
                             <div class="row m-0">
                                 <div class="col-lg-6 d-lg-block d-none text-center align-self-center px-1 py-0">
-                                    <img src="../pr/app-assets/images/pages/login.png" alt="branding logo">
+                                    <img src="../app-assets/images/pages/login.png" alt="branding logo">
                                     <p class="auto-in">سامانه مانیتورینگ و تجمیع داده</p>
                                 </div>
                                 <div class="col-lg-6 col-12 p-0">
@@ -132,11 +132,11 @@ label;
     <title>ورود به سامانه</title>
 
     <!-- BEGIN: Vendor CSS-->
-    <link rel="stylesheet" type="text/css" href="../pr/app-assets/vendors/css/vendors-rtl.min.css">
-    <link rel="stylesheet" type="text/css" href="../pr/app-assets/css-rtl/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="../pr/app-assets/css-rtl/bootstrap-extended.css">
-    <link rel="stylesheet" type="text/css" href="../pr/app-assets/css-rtl/components.css">
-    <link rel="stylesheet" type="text/css" href="../pr/app-assets/css-rtl/custom-rtl.css">
+    <link rel="stylesheet" type="text/css" href="../app-assets/vendors/css/vendors-rtl.min.css">
+    <link rel="stylesheet" type="text/css" href="../app-assets/css-rtl/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../app-assets/css-rtl/bootstrap-extended.css">
+    <link rel="stylesheet" type="text/css" href="../app-assets/css-rtl/components.css">
+    <link rel="stylesheet" type="text/css" href="../app-assets/css-rtl/custom-rtl.css">
 
 </head>
 <!-- END: Head-->
@@ -157,7 +157,7 @@ label;
                         <div class="card bg-authentication rounded-0 mb-0">
                             <div class="row m-0">
                                 <div class="col-lg-6 d-lg-block d-none text-center align-self-center px-1 py-0">
-                                    <img src="../pr/app-assets/images/pages/login.png" alt="branding logo">
+                                    <img src="../app-assets/images/pages/login.png" alt="branding logo">
                                     <p class="auto-in">سامانه مانیتورینگ و تجمیع داده</p>
                                 </div>
                                 <div class="col-lg-6 col-12 p-0">

@@ -28,7 +28,7 @@ $.get( "./model/leaflet.php", function( data ) {
     let cams = JSON.parse(data);
     // console.log(cams);
     for(let i = 0; i < cams.length; i++) {
-        let cam = new LeafIcon({iconUrl: '../pr/views/imgs/blue.png'});
+        let cam = new LeafIcon({iconUrl: '../views/imgs/blue.png'});
         let info = `
             <div class="row">
                 <div class="col-sm-12">
