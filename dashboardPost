@@ -1,4 +1,3 @@
-<!-- post to display-edit -->
         <script>
         function submitDisplay() {
           document.getElementById('displayForm').submit();

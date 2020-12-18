@@ -10,15 +10,23 @@ if ( isset($_POST['username']) && isset($_POST['password']) ) {
   $data = connect($username, $password);
   if ( $data[0] ) {
     //update last login 
-    $today = date('Y-m-d H:i:s');
-    $sql = "UPDATE Users SET LastLogin = '$today' WHERE Username = '$username'";
+    if(!isset($_POST['time'])) {
+      $today = date('Y-m-d H:i:s');
+      $sql = "UPDATE Users SET LastLogin = '$today' WHERE Username = '$username'";
 
-    if ($conn->query($sql) === TRUE) {
-      //render the page
-      wrtiteDashboard($username, $password, $data[1]);
-    } else {
-      die('There is a problem with database!');
-    }      
+      if ($conn->query($sql) === TRUE) {
+        //render the page
+        $now = date('H:i:s');
+        wrtiteDashboard($username, $password, $data[1], $now);
+      } else {
+        die('There is a problem with database!');
+      }
+    }
+    else {
+      $now = $_POST['time'];
+      wrtiteDashboard($_POST['username'], $_POST['password'], $_POST['usergrup'], $now);
+    }
+          
     
     
   } else {

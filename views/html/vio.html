@@ -29,6 +29,41 @@
 <body class="vertical-layout vertical-menu-modern 2-columns  navbar-floating footer-static  todo-application"
     data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
 
+    <script>
+        function submitDashboard() {
+          document.getElementById('indexForm').submit();
+        }
+
+        function submitSta() {
+          document.getElementById('staForm').submit();
+        } 
+
+        function submitConfig() {
+          document.getElementById('configForm').submit();
+        }
+        </script>
+
+        <form id="indexForm" method="POST" action="index.php">
+            <input name="username" style="display: none;" value="{username}" />
+            <input name="password" style="display: none;" value="{password}" />
+            <input name="usergrup" style="display: none;" value="{usergrup}" />
+            <input name="time" style="display: none;" value="{time}" />
+        </form>
+
+        <form id="staForm" method="POST" action="statistics.php">
+          <input name="username" style="display: none;" value="{username}" />
+          <input name="password" style="display: none;" value="{password}" />
+          <input name="usergrup" style="display: none;" value="{usergrup}" />
+          <input name="time" style="display: none;" value="{time}" />
+        </form>
+
+        <form id="configForm" method="POST" action="configuration.php">
+          <input name="username" style="display: none;" value="{username}" />
+          <input name="password" style="display: none;" value="{password}" />
+          <input name="usergrup" style="display: none;" value="{usergrup}" />
+          <input name="time" style="display: none;" value="{time}" />
+        </form>
+
     <!-- BEGIN: Header-->
     <nav class="header-navbar navbar-expand-lg navbar navbar-with-menu floating-nav navbar-light navbar-shadow">
         <div class="navbar-wrapper">
@@ -99,7 +134,7 @@
             <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
 
 
-                <li class=" nav-item "><a href="index.html"><i class="feather  icon-home"></i><span class="menu-title"
+                <li class=" nav-item "><a onclick="submitDashboard()"><i class="feather  icon-home"></i><span class="menu-title"
                             data-i18n="Email">داشبورد</span></a>
                 </li>
                 <li class=" nav-item active"><a href="edit.html"><i class="feather icon-edit-1"></i><span

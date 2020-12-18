@@ -39,39 +39,39 @@
     data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
 
         <!---begin forms-->
-        <script>
-            function submitDisplay() {
-              document.getElementById('displayForm').submit();
-            }
+    <script>
+        function submitDisplay() {
+          document.getElementById('displayForm').submit();
+        }
+
+        function submitSta() {
+          document.getElementById('staForm').submit();
+        } 
+
+        function submitConfig() {
+          document.getElementById('configForm').submit();
+        }
+    </script>
+    <form id="displayForm" method="POST" action="violations.php">
+        <input name="username" style="display: none;" value="{$uname}" id="uuuname" />
+        <input name="password" style="display: none;" value="{$pass}" />
+        <input name="usergrup" style="display: none;" value="{$usergrup}" />
+        <input name="time" style="display: none;" value="{$time}" />
+    </form>
     
-            function submitSta() {
-              document.getElementById('staForm').submit();
-            } 
-    
-            function submitConfig() {
-              document.getElementById('configForm').submit();
-            }
-        </script>
-        <form id="displayForm" method="POST" action="violations.php">
-            <input name="username" style="display: none;" value="{$uname}" />
-            <input name="password" style="display: none;" value="{$pass}" />
-            <input name="usergrup" style="display: none;" value="{$usergrup}" />
-            <input name="time" style="display: none;" value="{$time}" />
-        </form>
-        
-        <form id="staForm" method="POST" action="statistics.php">
-          <input name="username" style="display: none;" value="{$uname}" />
-          <input name="password" style="display: none;" value="{$pass}" />
-          <input name="usergrup" style="display: none;" value="{$usergrup}" />
-          <input name="time" style="display: none;" value="{$time}" />
-        </form>
-    
-        <form id="configForm" method="POST" action="configuration.php">
-          <input name="username" style="display: none;" value="{$uname}" />
-          <input name="password" style="display: none;" value="{$pass}" />
-          <input name="usergrup" style="display: none;" value="{$usergrup}" />
-          <input name="time" style="display: none;" value="{$time}" />
-        </form>
+    <form id="staForm" method="POST" action="statistics.php">
+      <input name="username" style="display: none;" value="{$uname}" />
+      <input name="password" style="display: none;" value="{$pass}" />
+      <input name="usergrup" style="display: none;" value="{$usergrup}" />
+      <input name="time" style="display: none;" value="{$time}" />
+    </form>
+
+    <form id="configForm" method="POST" action="configuration.php">
+      <input name="username" style="display: none;" value="{$uname}" />
+      <input name="password" style="display: none;" value="{$pass}" />
+      <input name="usergrup" style="display: none;" value="{$usergrup}" />
+      <input name="time" style="display: none;" value="{$time}" />
+    </form>
     
         <!--end forms-->
 
@@ -146,7 +146,7 @@
                 <li class=" nav-item active"><a href="index.html"><i class="feather  icon-home"></i><span
                             class="menu-title" data-i18n="Email">داشبورد</span></a>
                 </li>
-                <li class=" nav-item"><a href="edit.html"><i class="feather icon-edit-1"></i><span class="menu-title"
+                <li class=" nav-item"><a onclick="submitDisplay()"><i class="feather icon-edit-1"></i><span class="menu-title"
                             data-i18n="Chat">ثبت تخلف</span></a>
                 </li>
                 <li class=" nav-item"><a href="statistics.html"><i class="feather icon-bar-chart-2"></i><span
@@ -187,19 +187,19 @@
                                         <div class="form-group ">
                                             <label for="first-name-vertical">تاریخ :</label>
                                             <div class=" list-group-filters font-medium-1">
-                                                <a
+                                                <a time="today"
                                                     class="btn-outline-primary list-group-item list-group-item-action active">
                                                     امروز</a>
-                                                <a class="btn-outline-primary list-group-item list-group-item-action">
+                                                <a  time="Yesterday" class="btn-outline-primary list-group-item list-group-item-action">
                                                     دیروز</a>
-                                                <a class="btn-outline-primary list-group-item list-group-item-action">
+                                                <a time="Month" class="btn-outline-primary list-group-item list-group-item-action">
                                                     ماه گذشته</a>
-                                                <a class="btn-outline-primary list-group-item list-group-item-action">
+                                                <a time="Year" class="btn-outline-primary list-group-item list-group-item-action">
                                                     سال گذشته</a>
                                             </div>
                                         </div>
                                        
-                                        <button type="submit"
+                                        <button type="submit" onclick="query()"
                                             class="fyekan btn bg-gradient-success mr-1 mb-1 waves-effect waves-light">اعمال
                                             فیلتر</button>
 
