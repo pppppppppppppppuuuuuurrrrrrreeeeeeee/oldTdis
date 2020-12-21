@@ -58,10 +58,10 @@ function map() {
         countObs += statesAndCounts[i].countAllObserves;
         countEdi += statesAndCounts[i].countAllEdits;
       }
-      console.log('countRec   ', countRec);
-      console.log('countInf   ', countInf);
-      console.log('countObs   ', countObs);
-      console.log('countEdi   ', countEdi);
+      // console.log('countRec   ', countRec);
+      // console.log('countInf   ', countInf);
+      // console.log('countObs   ', countObs);
+      // console.log('countEdi   ', countEdi);
 
       for(let i = 0; i < statesAndCounts.length; i++) {
         for(let j = 0; j < paths.length; j++) {
@@ -99,7 +99,7 @@ function map() {
 
 
 //////\\\\\\\\\\\\\\user scripts //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-var globUsr;
+var globUsr = [];
 
 function usrCamChart(labels, data, backgroundColor, hoverBackgroundColor) {
   document.getElementById("userCanvasParent").innerHTML = '';
@@ -161,7 +161,6 @@ function usrContent() {
     hoverBackgroundColor.push(globUsr[i].hoverColor);
     data.push(globUsr[i][key]);
   }
-  console.log(data);
   usrCamChart(lables, data, backgroundColor, hoverBackgroundColor);
 }
 
@@ -206,12 +205,13 @@ function usr() {
           activities[i].hoverColor = rgba;
       }
       console.log(globUsr);
+      usrContent();
 
   });
 }
 
 
-var globCam;
+var globCam = [];
 
 function renderCamChart(labels, data, backgroundColor, hoverBackgroundColor) {
   document.getElementById("cameraCanvasParent").innerHTML = '';
@@ -321,6 +321,6 @@ function cam() {
           activities[i].hoverColor = rgba;
       }
       console.log(globCam);
+      camContent();
   });
 }
-

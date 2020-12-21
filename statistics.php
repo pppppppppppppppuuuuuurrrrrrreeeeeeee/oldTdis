@@ -222,9 +222,7 @@
                                     </div>
 
                                     <div class=" col-lg-9 col-md-9 col-sm-12 center mcenter">
-                                        <button type="submit"
-                                            class="fyekan btn bg-gradient-success mr-1 mb-1 waves-effect waves-light w1">
-                                            اعمال فیلتر </button>
+                                        <button onclick="query()" class="fyekan btn bg-gradient-success mr-1 mb-1 waves-effect waves-light w1">اعمال فیلتر</button>
                                         <!-- <button type="submit"
                                             class="fyekan btn bg-gradient-warning mr-1 mb-1 waves-effect waves-light w1">
                                             خروجی HTML</button> -->
@@ -323,7 +321,7 @@
                                                     <label for="first-name-vertical">کاربران :</label>
                                                     <div class="clr"></div>
                                                          <div class=" list-group-filters font-medium-1 mt-2">
-                                                        <a tag="observes" class="usrTags btn-outline-primary list-group-item list-group-item-action active">
+                                                        <a tag="observes" class="active usrTags btn-outline-primary list-group-item list-group-item-action active">
                                                            مشاهدات</a>
                                                         <a tag="reports" class="usrTags btn-outline-primary list-group-item list-group-item-action">
                                                             گزارش ها</a>
@@ -378,7 +376,6 @@
     </footer>
     <!-- END: Footer-->
 
-    <script src="./views/scripts/statisticsModule.js"></script>
     <script src="./views/scripts/statisticsClient.js"></script>
     <script>
         var radio = 'map';
@@ -396,6 +393,19 @@
             radio = id;
             li.className = 'showme';
         }
+
+
+        function query() {
+            if(radio == 'map') {
+                map();
+            } else if(radio == 'user') {
+                usr();
+            } else if(radio == 'camera') {
+                cam();
+            }
+        }
+        
+
     </script>
     <script src="../app-assets/js/scripts/vendors.min.js"></script>
     <script src="../app-assets/js/scripts/app-menu.js"></script>
@@ -414,7 +424,6 @@
     </script>
  <!-- calander -->
  <script src="../app-assets/js/scripts/kamadatepicker.js"></script>
-
  <script>
 
     function gregorian_to_jalali(gy, gm, gd) {
@@ -532,61 +541,11 @@
 
 <script src="../fusioncharts/themes/fusioncharts.theme.fusion.js">
 </script>
-
 <script>
-    // var provincesMap = "Tehran".toLocaleLowerCase();
 
-    // FusionCharts.ready(function () {
-    //     var iranMap = new FusionCharts({
-    //         type: 'maps/iran',
-    //         renderAt: 'iranMap',
-    //         width: '100%',
-    //         height: '100%',
-    //         dataFormat: 'json',
-    //         dataSource: {
-    //             "chart": {
-    //                 "theme": "fusion",
-    //                 "baseFont": "Samim, sans-serif",
-    //                 "legendItemFont": "Samim, sans-serif",
-    //                 "legendPosition": "left",
-    //                 "formatNumberScale": "0",
-    //                 "showLabels": "0",
-    //                 "useSNameInLabels": "0"
-    //             },
-    //             "colorrange": {
-    //                 "gradient": 0,
-    //                 "color": [{
-    //                     "minvalue": 0,
-    //                     "maxvalue": 100,
-    //                     "code": "#ffc893",
-    //                 }, {
-    //                     "minvalue": 100,
-    //                     "maxvalue": 200,
-    //                     "code": "#ffb670",
-    //                 }, {
-    //                     "minvalue": 200,
-    //                     "maxvalue": 250,
-    //                     "code": "#FF9F43",
-    //                 }, {
-    //                     "minvalue": 300,
-    //                     "maxvalue": 350,
-    //                     "code": "#fb9534",
-    //                 }, {
-    //                     "minvalue": 350,
-    //                     "maxvalue": 400,
-    //                     "code": "#f38114",
-    //                 }]
-                    
-    //             },
-    //             "data": [{
-    //                 "id": "IR.AL",
-    //                 "value": "200",
-                    
-    //             } ]
-
-    //         }
-    //     }).render();
-    // });
+map();
+usr();
+cam();
 </script>
 
 </body>
