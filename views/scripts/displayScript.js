@@ -184,11 +184,6 @@ function maneeTaradod() {
     else
         Pre = "10";
 
-    let Mapping = [" ", "01", "02", "21", "03", "25", "04", "19", " ", " ", "05",
-        " ", "17", "23", " ", "06", "24", "07", " ", "08", " ", "09", " ", "20", "10",
-        "18", "22", "11", "12", "13", "14", "15", "16", "33", "34"
-    ];
-
     PlateNo = TwoFirstNum + alphaToNum(Alphabet) + ThreeNum + TwoLastNum;
     PPlateNo = Pre + "0" + TwoLastNum + "00000000" + alphaToNumPolice(Alphabet) + TwoFirstNum + ThreeNum;
 
@@ -270,11 +265,6 @@ function sendToPolice() {
         Pre = "13";
     else
         Pre = "10";
-
-    let Mapping = [" ", "01", "02", "21", "03", "25", "04", "19", " ", " ", "05",
-        " ", "17", "23", " ", "06", "24", "07", " ", "08", " ", "09", " ", "20", "10",
-        "18", "22", "11", "12", "13", "14", "15", "16", "33", "34"
-    ];
 
     PlateNo = TwoFirstNum + alphaToNum(Alphabet) + ThreeNum + TwoLastNum;
     PPlateNo = Pre + "0" + TwoLastNum + "00000000" + alphaToNumPolice(Alphabet) + TwoFirstNum + ThreeNum;
