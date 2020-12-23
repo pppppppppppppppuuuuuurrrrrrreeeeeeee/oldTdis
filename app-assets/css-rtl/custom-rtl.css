@@ -1684,7 +1684,7 @@
 =========================================================*/
 
 @font-face {
-  font-family: 'W_yekan';
+  font-family: 'W_Yekan';
   src: url('../fonts/W_Yekan.eot');
   src: local('?'), url('../fonts/W_Yekan.woff') format('woff'), url('../fonts/W_Yekan.ttf') format('truetype'), url('../fonts/W_Yekan.otf') format('otf');
   font-weight: normal;
@@ -2590,6 +2590,7 @@ footer p {
 .report-page .fflex {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-evenly;
 }
 
 .report-page .pt-1 {
@@ -3149,7 +3150,7 @@ color: #7367f1;
   .chartMap {
     width: auto;
     height: 600px;
-    font-family:'W-Yekan';
+    font-family:'W-yekan';
 }
 }
 .auto-in{
@@ -3179,4 +3180,8 @@ input[type=number]::-webkit-inner-spin-button {
 
 input[type=number] {
     -moz-appearance:textfield;
+}
+.carCam .select2{
+  width: 100% !important;
+  margin-top: 2.7em;
 }

@@ -6,6 +6,7 @@ require_once __DIR__.'/../ChromePhp.php';
 
 date_default_timezone_set('Asia/Tehran');
 
+
 function readCameras() {
     global $conn;
     $cameras = [];

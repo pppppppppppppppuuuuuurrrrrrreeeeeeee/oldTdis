@@ -463,7 +463,6 @@ select.form-control:not([multiple='multiple']) {
 .custom-control-label::before, .custom-control-label::after {
   width : 1.143rem;
   height : 1.143rem;
-  top : 0.08rem;
 }
 
 .custom-control-input:not(:disabled):active ~ .custom-control-label::before {
