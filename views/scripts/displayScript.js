@@ -20,7 +20,7 @@ var vehicleIndex;
 var PlateImage = "";
 var VehicleImage = "";
 
-var loader = document.querySelector('#loader');
+// var loader = document.querySelector('#loader');
 var transParent = document.getElementsByClassName('transParent');
 var btn = document.getElementsByClassName('btn');
 
@@ -202,7 +202,7 @@ function maneeTaradod() {
 
     createPacket(PPlateNo, 'taradod', function(val) {
         if (val == "false") {
-            alert('Can not connect to server');
+            alert('دسترسی به سرور راهور امکان پذیر نمیباشد');
         }
         else if (val != "true") {
             alert(val);
@@ -233,25 +233,25 @@ function sendToPolice() {
     let shartStatus = policeStatusFake.indexOf(cameraIdTd);
     if(shartStatus != -1) {
         //enable loader
-        for(let i = 0; i < transParent.length; i++) {
-            transParent[i].style.opacity = '30%';
-        }
-        for(let i = 0; i < btn.length; i++) {
-            btn[i].disabled = true;
-        }
-        loader.className = "col-sm-12 showSpinner";
+        // for(let i = 0; i < transParent.length; i++) {
+        //     transParent[i].style.opacity = '30%';
+        // }
+        // for(let i = 0; i < btn.length; i++) {
+        //     btn[i].disabled = true;
+        // }
+        // loader.className = "col-sm-12 showSpinner";
         
         setTimeout(() => {
             alert('دسترسی به سرور پلیس امکان پذیر نیست!');
             //diable loader
-            loader.className = "col-sm-12 disSpinner";
-            for(let i = 0; i < transParent.length; i++) {
-                transParent[i].style.opacity = '100%';
-            }
-            for(let i = 0; i < btn.length; i++) {
-                btn[i].disabled = false;
-            }
-            console.log('fake');
+            // loader.className = "col-sm-12 disSpinner";
+            // for(let i = 0; i < transParent.length; i++) {
+            //     transParent[i].style.opacity = '100%';
+            // }
+            // for(let i = 0; i < btn.length; i++) {
+            //     btn[i].disabled = false;
+            // }
+            // console.log('fake');
         }, 4000);
 
         return;
@@ -265,7 +265,7 @@ function sendToPolice() {
     
     let speedch = document.getElementById('TDspeed').innerText;
     if(speedch < 70) {
-        alert('this vehicles speed is lower than 70 !');
+        alert('سرعت این اتوموبیل کمتر از ۷۰ میباشد');
         return;
     }
 
@@ -303,13 +303,13 @@ function sendToPolice() {
 
 function createPacket(plateNo, packetStatus, callback) {
     //enable loader
-    for(let i = 0; i < transParent.length; i++) {
-        transParent[i].style.opacity = '30%';
-    }
-    for(let i = 0; i < btn.length; i++) {
-        btn[i].disabled = true;
-    }
-    loader.className = "col-sm-12 showSpinner";
+    // for(let i = 0; i < transParent.length; i++) {
+    //     transParent[i].style.opacity = '30%';
+    // }
+    // for(let i = 0; i < btn.length; i++) {
+    //     btn[i].disabled = true;
+    // }
+    // loader.className = "col-sm-12 showSpinner";
 
 
     let PassedTime = document.getElementById('TDpassedTime').innerText;
@@ -348,13 +348,13 @@ function createPacket(plateNo, packetStatus, callback) {
 
     if(flag === false) {
         //diable loader
-        loader.className = "col-sm-12 disSpinner";
-        for(let i = 0; i < transParent.length; i++) {
-            transParent[i].style.opacity = '100%';
-        }
-        for(let i = 0; i < btn.length; i++) {
-            btn[i].disabled = false;
-        }
+        // loader.className = "col-sm-12 disSpinner";
+        // for(let i = 0; i < transParent.length; i++) {
+        //     transParent[i].style.opacity = '100%';
+        // }
+        // for(let i = 0; i < btn.length; i++) {
+        //     btn[i].disabled = false;
+        // }
         return;
     }
 
@@ -434,13 +434,13 @@ function createPacket(plateNo, packetStatus, callback) {
                 },
                 success: function(returnValue) {
                     //diable loader
-                    loader.className = "col-sm-12 disSpinner";
-                    for(let i = 0; i < transParent.length; i++) {
-                        transParent[i].style.opacity = '100%';
-                    }
-                    for(let i = 0; i < btn.length; i++) {
-                        btn[i].disabled = false;
-                    }
+                    // loader.className = "col-sm-12 disSpinner";
+                    // for(let i = 0; i < transParent.length; i++) {
+                    //     transParent[i].style.opacity = '100%';
+                    // }
+                    // for(let i = 0; i < btn.length; i++) {
+                    //     btn[i].disabled = false;
+                    // }
 
                       //alert(returnValue);
                     console.log("returnValue:"+returnValue);
@@ -458,22 +458,22 @@ function createPacket(plateNo, packetStatus, callback) {
                         alert('سرور راهور :' + xmlDoc.getElementsByTagName("ns1:message")[0].childNodes[0].nodeValue);
                         //   callback(returnValue);
                         $.post('packetProblems.php', {
-                        returnValue: returnValue,
-                        recId: document.querySelector('#TDrecordID').innerText
+                            returnValue: returnValue,
+                            recId: document.querySelector('#TDrecordID').innerText
                         });  
                     }
                 }
             }).fail(function(jqXHR, textStatus, error) {
                  //diable loader
-                loader.className = "col-sm-12 disSpinner";
-                for(let i = 0; i < transParent.length; i++) {
-                    transParent[i].style.opacity = '100%';
-                }
-                for(let i = 0; i < btn.length; i++) {
-                    btn[i].disabled = false;
-                }
+                // loader.className = "col-sm-12 disSpinner";
+                // for(let i = 0; i < transParent.length; i++) {
+                //     transParent[i].style.opacity = '100%';
+                // }
+                // for(let i = 0; i < btn.length; i++) {
+                //     btn[i].disabled = false;
+                // }
 
-                alert('request to rahvar failed!');
+                alert('دسترسی به سرور رراهور با مشکل مواجه شد');
             });
         }
     });
@@ -533,9 +533,9 @@ function reportRec() {
     },
     function(data) {
         if(data =="true"){
-            alert('Your report sent successfully')
+            alert('گزارش شما با موفقیت ارسال شد');
         } else {
-            alert('there is a problem with this record!');
+            alert('مشکلی در ارسال گزارش پیش آمد');
         }
     });
 }
@@ -934,10 +934,10 @@ function edit() {
     function(data,status){
         // console.log(data);
         if(data == 'true') {
-            alert('Record edited successfully!');
+            alert('پلاک با موفقیت اصلاح شد');
             queryVehilces[vehicleIndex].MasterPlateValue = plate;
         } else {
-            alert('there is a problem with this record');
+            alert('مشکلی در اصلاح پلاک پیش آمد!');
         }
         vehicleInfo(vehicleIndex);
     });
@@ -958,9 +958,9 @@ function deleteRec() {
     function(data,status){
         // console.log(data);
         if(data == 'true') {
-            alert('Record deleted successfully!');
+            alert('رکورد با موفقیت حذف شد');
         } else {
-            alert('there is a problem with this record')
+            alert('حذف رکرود با مشکل مواجه شد')
         }
     });
     queryVehilces.splice(vehicleIndex, 1);
