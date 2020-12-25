@@ -34,6 +34,54 @@
 <body class="vertical-layout vertical-menu-modern 2-columns  navbar-floating footer-static  todo-application"
     data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
 
+    	   <!---begin forms-->
+    <script>
+        function submitDisplay() {
+          document.getElementById('displayForm').submit();
+        }
+
+        function submitSta() {
+          document.getElementById('staForm').submit();
+        } 
+
+        function dashForm() {
+          document.getElementById('dashForm').submit();
+        }
+
+        function submitConfig() {
+          document.getElementById('configForm').submit();
+        }
+    </script>
+    <form id="displayForm" method="POST" action="violations.php">
+        <input name="username" style="display: none;" value="{username}" />
+        <input name="password" style="display: none;" value="{password}" />
+        <input name="usergrup" style="display: none;" value="{usergrup}" />
+        <input name="time" style="display: none;" value="{time}" />
+    </form>
+    
+    <form id="staForm" method="POST" action="statistics.php">
+      <input name="username" style="display: none;" value="{username}" />
+      <input name="password" style="display: none;" value="{password}" />
+      <input name="usergrup" style="display: none;" value="{usergrup}" />
+      <input name="time" style="display: none;" value="{time}" />
+    </form>
+
+    <form id="dashForm" method="POST" action="index.php">
+        <input name="username" style="display: none;" value="{username}" />
+        <input name="password" style="display: none;" value="{password}" />
+        <input name="usergrup" style="display: none;" value="{usergrup}" />
+        <input name="time" style="display: none;" value="{time}" />
+      </form>
+
+    <form id="configForm" method="POST" action="configuration.php">
+      <input name="username" style="display: none;" value="{username}" />
+      <input name="password" style="display: none;" value="{password}" />
+      <input name="usergrup" style="display: none;" value="{usergrup}" />
+      <input name="time" style="display: none;" value="{time}" />
+    </form>
+
+    <!--end forms-->
+    
     <!-- BEGIN: Header-->
     <nav class="header-navbar navbar-expand-lg navbar navbar-with-menu floating-nav navbar-light navbar-shadow">
         <div class="navbar-wrapper">
@@ -58,7 +106,7 @@
                         <li class="dropdown dropdown-user nav-item"><a href="#"
                                 class="dropdown-toggle nav-link dropdown-user-link" data-toggle="dropdown">
                                 <div class="user-nav d-sm-flex d-none">
-                                    <span class="user-name">نام کاربر
+                                    <span class="user-name">{username}
                                     </span></div>
                                 <div class="user-icon">
                                     <i class="feather icon-user"></i>
@@ -69,10 +117,10 @@
                                     <i class="feather icon-clock
                                     "></i>
 
-                                    6:15 زمان ورود به سیستم
+                                    {time} زمان ورود به سیستم
                                 </p>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="auth-login.html"><i class="feather icon-power"></i> خروج
+                                <a class="dropdown-item" href="index.php"><i class="feather icon-power"></i> خروج
                                     از سیستم</a>
                             </div>
                         </li>
@@ -102,16 +150,16 @@
             <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
 
 
-                <li class=" nav-item "><a href="index.html"><i class="feather  icon-home"></i><span class="menu-title"
+                <li class=" nav-item "><a onclick="dashForm()"><i class="feather  icon-home"></i><span class="menu-title"
                             data-i18n="Email">داشبورد</span></a>
                 </li>
-                <li class=" nav-item "><a href="edit.html"><i class="feather icon-edit-1"></i><span class="menu-title"
-                            data-i18n="Chat">ویرایش</span></a>
+                <li class=" nav-item "><a onclick="submitDisplay()"><i class="feather icon-edit-1"></i><span class="menu-title"
+                            data-i18n="Chat">ثبت تخلف</span></a>
                 </li>
-                <li class=" nav-item"><a href="statistics.html"><i class="feather icon-bar-chart-2"></i><span
+                <li class=" nav-item"><a onclick="submitSta()"><i class="feather icon-bar-chart-2"></i><span
                             class="menu-title" data-i18n="Todo">آمار</span></a>
                 </li>
-                <li class=" nav-item active"><a href="report.html"><i class="feather icon-clipboard"></i><span
+                <li class=" nav-item active"><a><i class="feather icon-clipboard"></i><span
                             class="menu-title" data-i18n="Calender">گزارش</span></a>
                 </li>
                 <li class=" nav-item"><a href="setting.html"><i class="feather icon-settings"></i><span

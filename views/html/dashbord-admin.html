@@ -48,6 +48,10 @@
           document.getElementById('staForm').submit();
         } 
 
+        function repForm() {
+          document.getElementById('repForm').submit();
+        }
+
         function submitConfig() {
           document.getElementById('configForm').submit();
         }
@@ -65,6 +69,13 @@
       <input name="usergrup" style="display: none;" value="{$usergrup}" />
       <input name="time" style="display: none;" value="{$time}" />
     </form>
+
+    <form id="repForm" method="POST" action="report.php">
+        <input name="username" style="display: none;" value="{$uname}" />
+        <input name="password" style="display: none;" value="{$pass}" />
+        <input name="usergrup" style="display: none;" value="{$usergrup}" />
+        <input name="time" style="display: none;" value="{$time}" />
+      </form>
 
     <form id="configForm" method="POST" action="configuration.php">
       <input name="username" style="display: none;" value="{$uname}" />
@@ -143,16 +154,16 @@
             <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
 
 
-                <li class=" nav-item active"><a href="index.html"><i class="feather  icon-home"></i><span
+                <li class=" nav-item active"><a><i class="feather  icon-home"></i><span
                             class="menu-title" data-i18n="Email">داشبورد</span></a>
                 </li>
                 <li class=" nav-item"><a onclick="submitDisplay()"><i class="feather icon-edit-1"></i><span class="menu-title"
                             data-i18n="Chat">ثبت تخلف</span></a>
                 </li>
-                <li class=" nav-item"><a href="statistics.html"><i class="feather icon-bar-chart-2"></i><span
+                <li class=" nav-item"><a onclick="submitSta()"><i class="feather icon-bar-chart-2"></i><span
                             class="menu-title" data-i18n="Todo">آمار</span></a>
                 </li>
-                <li class=" nav-item"><a href="report.html"><i class="feather icon-clipboard"></i><span
+                <li class=" nav-item"><a onclick="repForm()"><i class="feather icon-clipboard"></i><span
                             class="menu-title" data-i18n="Calender">گزارش</span></a>
                 </li>
                 <li class=" nav-item"><a href="setting.html"><i class="feather icon-settings"></i><span

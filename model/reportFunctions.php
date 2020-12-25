@@ -132,7 +132,7 @@ function Report($sql, $columns) {
                     ";
                     $tr .= "
                     <td>
-                        <img style=\"width:200px; height:100px;\" src =\"$root/$veh\" alt=\"$alt\" onclick=\"window.open(this.src)\" />
+                        <img style=\"width:200px; height:100px;\" src =\"$root/store/$veh\" alt=\"$alt\" onclick=\"window.open(this.src)\" />
                     </td>
                     ";
                 }                
