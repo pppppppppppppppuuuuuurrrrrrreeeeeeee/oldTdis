@@ -116,14 +116,15 @@ function Report($sql, $columns) {
                     $veh = $src = $row[$head];
                     $src = str_replace("I.jpg", "P.jpg", $src);
                     $alt = $row['MasterPlateValue'];
+                    $root = getRoot();
                     $tr .= "
                     <td>
-                        <img style=\"width:200px; height:60px;\" src =\"http://192.168.98.162/store/$src\" alt=\"$alt\" onclick=\"window.open(this.src)\" />
+                        <img style=\"width:200px; height:60px;\" src =\"$root/store/$src\" alt=\"$alt\" onclick=\"window.open(this.src)\" />
                     </td>
                     ";
                     $tr .= "
                     <td>
-                        <img style=\"width:200px; height:100px;\" src =\"http://192.168.98.162/store/$veh\" alt=\"$alt\" onclick=\"window.open(this.src)\" />
+                        <img style=\"width:200px; height:100px;\" src =\"$root/store/$veh\" alt=\"$alt\" onclick=\"window.open(this.src)\" />
                     </td>
                     ";
                 }                

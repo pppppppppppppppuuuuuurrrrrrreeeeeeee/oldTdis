@@ -75,6 +75,15 @@ function getIDsByStates() {
     return $all;
 }
 
+function getRoot() {
+    global $conn;
+
+    $sql = "SELECT Val From `Globals` WHERE Name = 'Root'";
+    $res = $conn->query($sql);
+    $row = $res->fetch_assoc();
+    return $row['Val'];
+}
+
 
 function getCameraID($name){
   global $conn;

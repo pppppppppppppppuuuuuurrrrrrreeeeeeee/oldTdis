@@ -60,12 +60,20 @@ function sqlCountStar($sql) {
     return (int)$row['COUNT(*)'];
 }
 
+function getRoot() {
+    global $conn;
+
+    $sql = "SELECT Val From `Globals` WHERE Name = 'Root'";
+    $res = $conn->query($sql);
+    $row = $res->fetch_assoc();
+    return $row['Val'];
+}
 function Report($sql, $columns) {
     ChromePhp::log($sql);
 
     global $conn;
     $now = date('Y-m-d H_i_s');
-    chdir('export');
+    chdir('../export');
     mkdir($now) or die('cant create dir');
     chdir($now);
     mkdir('data');
@@ -116,14 +124,15 @@ function Report($sql, $columns) {
                     $veh = $src = $row[$head];
                     $src = str_replace("I.jpg", "P.jpg", $src);
                     $alt = $row['MasterPlateValue'];
+                    $root = getRoot();
                     $tr .= "
                     <td>
-                        <img style=\"width:200px; height:60px;\" src =\"http://192.168.98.162/store/$src\" alt=\"$alt\" onclick=\"window.open(this.src)\" />
+                        <img style=\"width:200px; height:60px;\" src =\"$root/store/$src\" alt=\"$alt\" onclick=\"window.open(this.src)\" />
                     </td>
                     ";
                     $tr .= "
                     <td>
-                        <img style=\"width:200px; height:100px;\" src =\"http://192.168.98.162/store/$veh\" alt=\"$alt\" onclick=\"window.open(this.src)\" />
+                        <img style=\"width:200px; height:100px;\" src =\"$root/$veh\" alt=\"$alt\" onclick=\"window.open(this.src)\" />
                     </td>
                     ";
                 }                
@@ -167,7 +176,7 @@ function Report($sql, $columns) {
         file_put_contents($pageNumber, $content);
 
         chdir('..');
-        $html = str_replace(['{headers}', '{title}', '{len}'], [$headers, "$now Report", $pageNumber], file_get_contents('../../templates/localReport.html'));
+        $html = str_replace(['{headers}', '{title}', '{len}'], [$headers, "$now Report", $pageNumber], file_get_contents('/var/www/html/report/templates/localReport.html'));
         if(file_put_contents("index.html", $html) !== FALSE) {
             echo "export/$now/index.html";
         } else {
@@ -182,18 +191,19 @@ function ReportZip($sql, $columns) {
 
     global $conn;
     $now = date('Y-m-d H_i_s');
-    chdir('export');
+    chdir('../export');
     mkdir($now) or die('cant create dir');
     chdir($now);
     mkdir('data');
     chdir('data');
-    copy('../../../lib/bootstrap.min.css', 'bootstrap.min.css');
-    copy('../../../fonts/roya/BRoyaBold.woff', 'BRoyaBold.woff');
-    copy('../../../fonts/roya/BRoyaBold.woff2', 'BRoyaBold.woff2');
-    copy('../../../lib/jquery.min.js', 'jquery.min.js');
-    copy('../../../lib/popper.min.js', 'popper.min.js');
-    copy('../../../lib/bootstrap.min.js', 'bootstrap.min.js');
-    copy('../../../img/plateWhite.png', 'plateWhite.png');
+    
+    copy('/var/www/html/reportLib/lib/bootstrap.min.css', 'bootstrap.min.css');
+    copy('/var/www/html/reportLib/fonts/roya/BRoyaBold.woff', 'BRoyaBold.woff');
+    copy('/var/www/html/reportLib/fonts/roya/BRoyaBold.woff2', 'BRoyaBold.woff2');
+    copy('/var/www/html/reportLib/lib/jquery.min.js', 'jquery.min.js');
+    copy('/var/www/html/reportLib/lib/popper.min.js', 'popper.min.js');
+    copy('/var/www/html/reportLib/lib/bootstrap.min.js', 'bootstrap.min.js');
+    copy('/var/www/html/reportLib/img/plateWhite.png', 'plateWhite.png');
     //create table headers
     $columns = explode(',', $columns);
     $headers = "";
@@ -270,7 +280,7 @@ function ReportZip($sql, $columns) {
         $dataString .= "data.push(`$content`);";
 
         chdir('..');
-        $html = str_replace(['{headers}', '{title}', '{len}', '{dataArr}'], [$headers, "$now Report", $pageNumber, $dataString], file_get_contents('../../templates/expReport.html'));
+        $html = str_replace(['{headers}', '{title}', '{len}', '{dataArr}'], [$headers, "$now Report", $pageNumber, $dataString], file_get_contents('/var/www/html/report/templates/expReport.html'));
         if(file_put_contents("index.html", $html) !== FALSE) {
             echo "export/$now/index.html";
         } else {

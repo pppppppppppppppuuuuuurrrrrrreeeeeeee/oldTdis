@@ -1,0 +1,81 @@
+
+
+.svg-inline--fa {
+    width: 1.125em;
+}
+
+.plateWhite {
+    background-image: url('../img/plateWhite.png');
+}
+
+.plateBox {
+    float: left;
+    background-size: 100%100%;
+    font-family: "Roya", sans-serif;
+    width: 245px;
+    height: 50px;
+}
+
+.box1 {
+    float: left;
+    margin: 1.3% 0% 0% 10.2%;
+    width: 17%;
+    height: 87.3%;
+}
+.box2 {
+    float: left;
+    margin: 1.3% 0% 0% 0%;
+    width: 23%;
+    height: 87.3%;
+    direction: rtl;
+}
+.box3 {
+    float: left;
+    margin: 1.3% 0% 0% 0%;
+    width: 26.4%;
+    height: 87.3%;
+}
+.box4 {
+    float: left;
+    margin: 5% 0% 0% 1%;
+    width: 20%;
+    height: 68%;
+}
+
+.boxNumber1, .boxNumber3, .boxNumber1s, .boxNumber3s {
+    width: 100%;
+    height: 100%;
+    font-size: xx-large;
+    text-align: center;
+    font-weight: bold;
+    padding-top: 15%;
+}
+
+.boxNumber2, .boxNumber2s {
+    width: 100%;
+    height: 100%;
+    font-size: xx-large;
+    text-align: center;
+    font-weight: bold;
+    padding-top: 5%;
+}
+
+.boxNumber4, .boxNumber4s {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    font-size: x-large;
+    font-weight: bold;
+    border-radius: 0px 0px 3px 0px;
+    padding-top: 15%;
+}
+.plateWhite div input {
+    background-color: white;
+}
+
+.show {
+    display: '' !important;
+}
+.hide {
+    display: none !important;
+}

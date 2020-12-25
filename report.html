@@ -411,7 +411,7 @@
                                     <div class="custom-control custom-checkbox  mb-2">
 
                                         <input type="checkbox" class="custom-control-input fff" name="join" id="join">
-                                        <label class="custom-control-label" for="cont" data-toggle="tooltip"
+                                        <label class="custom-control-label" for="join" data-toggle="tooltip"
                                             data-placement="left">
                                             ارتباط با جدول کاربران
                                         </label>
@@ -513,9 +513,9 @@
                                     <div class="center">
                                         <button onclick="submit('false')" type="submit" class="fyekan btn bg-gradient-success mr-1 mb-1 waves-effect waves-light w1">
                                             تعداد کل</button>
-                                        <button type="submit" class="fyekan btn bg-gradient-info mr-1 mb-1 waves-effect waves-light w1">اعمال
+                                        <button onclick="submit('true')" type="submit" class="fyekan btn bg-gradient-info mr-1 mb-1 waves-effect waves-light w1">اعمال
                                             خروجی HTML</button>
-                                        <button type="submit" class="fyekan btn bg-gradient-warning mr-1 mb-1 waves-effect waves-light w1">اعمال
+                                        <button onclick="zip()" type="submit" class="fyekan btn bg-gradient-warning mr-1 mb-1 waves-effect waves-light w1">اعمال
                                             خروجیZIP</button>
                                     </div>
 
@@ -554,6 +554,280 @@
     <script src="../app-assets/js/scripts/dashboard-analytics.js"></script>
     <script src="../app-assets/js/scripts/touchspin.min.js"></script>
     <script src='../app-assets/js/scripts/select2.full.min.js'></script>
+    <script>
+function zip() {
+   //enable loader
+//   document.querySelector('#spinner').className = 'col-sm-12 d-flex justify-content-center show';
+//   document.body.style.opacity = '50%';
+    var boll = 'true';
+
+   //times 
+   let startDate = document.querySelector('#startDate').value;
+   let startTime = document.querySelector('#startTime').value;
+   let endDate = document.querySelector('#endDate').value;
+   let endTime = document.querySelector('#endTime').value;
+ 
+   if(startDate == null || startDate == ''){
+     alert('تاریخ شروع نمیتواند خالی باشد');
+     return;
+   }
+   if(startTime == null || startTime == ''){
+     alert('زمان شروع نمیتواند خالی باشد');
+     return;
+   }
+   if(endDate == null || endDate == ''){
+     alert('تاریخ پایان نمیتواند خالی باشد');
+     return;
+   }
+   if(endTime == null || endTime == ''){
+     alert('زمان پایان نمیتواند خالی باشد');
+     return;
+   }
+//    console.log(startDate);
+//    console.log(startTime);
+//    console.log(endDate);
+//    console.log(endTime);
+//    return;
+ 
+   //poles and cameras
+   let Poles = $('#Pole').val();
+   let Cameras = $('#Cameras').val();
+   if(Poles.length == 1 && Cameras.length == 0) {
+    alert('شما باید حداقل یک دوربین برای سامانه ی مورد نظر خود انتخاب کنید');
+    return;
+   } else if(Poles.length == 0) {
+    alert('شما باید حد اقل یک سامانه انتخاب کنید');
+    return;
+   }
+ 
+   //Accuracy
+   let AccuracyMin = document.getElementById('connectedSlider2').children[0].children[0].children[0].getAttribute('data-value');
+   let AccuracyMax = document.getElementById('connectedSlider2').children[0].children[1].children[0].getAttribute('data-value');
+//    console.log(AccuracyMax);
+//    console.log(AccuracyMin);
+ 
+   //Speed
+   let minSpeed = document.getElementById('connectedSlider').children[0].children[0].children[0].getAttribute('data-value');
+   let maxSpeed = document.getElementById('connectedSlider').children[0].children[1].children[0].getAttribute('data-value');
+//    console.log(minSpeed);
+//    console.log(maxSpeed);
+ 
+ 
+   //Lane Number
+   let lane1 = document.querySelector('#lane1').checked;
+   let lane2 = document.querySelector('#lane2').checked;
+   let lane3 = document.querySelector('#lane3').checked;
+   let lane4 = document.querySelector('#lane4').checked;
+   let lane5 = document.querySelector('#lane5').checked;
+//    console.log('lane1', lane1);
+//    console.log('lane2', lane2);
+//    console.log('lane3', lane3);
+//    console.log('lane4', lane4);
+//    console.log('lane5', lane5);
+ 
+   //Direction
+   let upToDown = document.querySelector('#upToDown').checked;
+   let downToUp = document.querySelector('#downToUp').checked;
+//    console.log('upToDown', upToDown);
+//    console.log('downToUp', downToUp);
+ 
+   //Vehicle
+   let vehicleLight = document.querySelector('#vehicleLight').checked;
+   let vehicleHeavy = document.querySelector('#vehicleHeavy').checked;
+//    console.log('vehicleLight', vehicleLight);
+//    console.log('vehicleHeavy', vehicleHeavy);
+   
+ 
+   //Custom Plate
+   let box1 = convertToEnglishNum(document.getElementById('boxNumber1').value);
+   let box2 = alphaToNum(document.getElementById('boxNumber2').value);
+   let box3 = convertToEnglishNum(document.getElementById('boxNumber3').value);
+   let box4 = convertToEnglishNum(document.getElementById('boxNumber4').value);
+   
+   if(box1.length == 1) {
+       alert('باکس اول پلاک باید خالی یا شامل دو عدد باشد');
+       return;
+   } else if(box1.length == 0) {
+       box1 = '__';
+   }
+   
+   if(box2 == null || box2 == '') {
+     document.getElementById('boxNumber2').value = '';
+     box2 = '__';
+   }
+
+   if(box3.length == 1 || box3.length == 2) {
+       alert('باکس سوم پلاک باید خالی یا شامل سه عدد باشد');
+       return;
+   } else if(box3.length == 0) {
+       box3 = '___';
+   }
+
+   if(box4.length == 1) {
+       alert('باکس چهارم پلاک باید خالی یا شامل دو عدد باشد');
+       return;
+   } else if(box4.length == 0) {
+        box4 = '__';
+   }
+
+
+   let plate = box1 + box2 + box3 + box4;
+//    console.log(plate);
+//    return;
+
+   let cols = $("#cols").val();
+   if(cols.length < 1) {
+     alert('شما باید حداقل یک سوتون از جدول دوربین ها انتخاب کنید ');
+     return;
+   }
+   cols.push('ID');
+ 
+   //inner join
+   let innerJoin = document.querySelector('#join').checked;
+   if(!innerJoin) {
+    $.ajax({
+      type: "post",
+      url: './model/reportQuery.php',
+      async: false,
+      data: {
+        status: 'PassedVehicleRecordsZip',
+        boll: boll,
+        cols: cols.toString(),
+        startDate: startDate,
+        startTime: startTime,
+        endDate: endDate,
+        endTime: endTime,
+        Poles: Poles.toString(),
+        Cameras: Cameras.toString(),
+        AccuracyMin: AccuracyMin,
+        AccuracyMax: AccuracyMax,
+        minSpeed: minSpeed,
+        maxSpeed: maxSpeed,
+        lane1: lane1,
+        lane2: lane2,
+        lane3: lane3,
+        lane4: lane4,
+        lane5: lane5,
+        upToDown: upToDown,
+        downToUp: downToUp,
+        vehicleLight: vehicleLight,
+        vehicleHeavy: vehicleHeavy,
+        plate: plate
+      },
+      success: function(data) {
+        //dislabe loader
+        // document.querySelector('#spinner').className = 'col-sm-12 d-flex justify-content-center hide';
+        //  document.body.style.opacity = '100%';
+
+        console.log(data);
+        if(data == 'no rec!') {
+          alert('رکوردی در این بازه ی زمانی با فیلتر های در خواستی شما یافت نشد!');
+        } else if(data == 'fail') {
+          alert('ساخت فایل با مشکل مواجه شد!');
+        }else if(Number.isInteger(parseInt(data))) {
+          alert(`${data} سطر یافت شد!`)
+        } 
+        else {
+          path = data.replace('index.html', '');
+          console.log(path);
+          $.post('./model/zip.php', {
+            path: path
+          }, function(data, status) {
+              console.log(data);
+            javascript:void(window.open( data, '_blank'));
+          });
+        }
+      } 
+     }).fail(function(jqXHR, textStatus, error) {
+        alert('request failed');
+      });
+ 
+   } else {
+         let usrObs = "AllOftheUsers";
+       let usrEdi = "AllOftheUsers";
+       let usrDEL = "AllOftheUsers";
+       let usrSENT = "AllOftheUsers";
+ 
+       let Usrcols = $("#Usrcols").val();
+       if(Usrcols.length < 1) {
+         alert('You must select at least 1 user column!');
+         return;
+       }
+       Usrcols.push('passedVehicleRecordID');
+ 
+       usrObs = $('#UserOBS').val().toString();
+       usrEdi = $('#usrEDIT').val().toString();
+       usrDEL = $('#usrDEL').val().toString();
+       usrSENT = $('#ustSENT').val().toString();
+       
+       // console.log('usrObs', usrObs);
+       // console.log('usrEdi', usrEdi);
+       // console.log('usrDEL', usrDEL);
+       // console.log('usrSENT', usrSENT);
+       $.ajax({
+        type: "post",
+        url: './model/reportQuery.php',
+        async: false,
+        data:{
+            status: 'innerJoinZip',
+            boll: boll,
+            cols: cols.toString(),
+            Usrcols: Usrcols.toString(),
+            startDate: startDate,
+            startTime: startTime,
+            endDate: endDate,
+            endTime: endTime,
+            Poles: Poles.toString(),
+            Cameras: Cameras.toString(),
+            AccuracyMin: AccuracyMin,
+            AccuracyMax: AccuracyMax,
+            minSpeed: minSpeed,
+            maxSpeed: maxSpeed,
+            lane1: lane1,
+            lane2: lane2,
+            lane3: lane3,
+            lane4: lane4,
+            lane5: lane5,
+            upToDown: upToDown,
+            downToUp: downToUp,
+            vehicleLight: vehicleLight,
+            vehicleHeavy: vehicleHeavy,
+            plate: plate,
+            usrObs: usrObs,
+            usrEdi: usrEdi,
+            usrDEL: usrDEL,
+            usrSENT: usrSENT
+        },
+        success: function(data) {
+        //dislabe loader
+        // document.querySelector('#spinner').className = 'col-sm-12 d-flex justify-content-center hide';
+        // document.body.style.opacity = '100%';
+
+          console.log(data);
+          if(data == 'no rec!') {
+            alert('رکوردی در این بازه ی زمانی با فیلتر های در خواستی شما یافت نشد!');
+          } else if(data == 'fail') {
+            alert('ساخت فایل با مشکل مواجه شد!');
+          }else if(Number.isInteger(parseInt(data))) {
+            alert(`${data} سطر یافت شد!`)
+          } 
+          else {
+            path = data.replace('index.html', '');
+            $.post('./model/zip.php', {
+              path: path
+            }, function(data, status) {
+              javascript:void(window.open(data, '_blank'));
+            });
+          }
+        }
+         
+       }).fail(function(jqXHR, textStatus, error) {
+        alert('request failed');
+      });
+ 
+   }
+}
+    </script>
     <script>
 function submit(boll) {
    //enable loader
@@ -727,7 +1001,7 @@ function submit(boll) {
           alert(`${data} سطر یافت شد!`)
         } 
         else {
-          javascript:void(window.open( window.location.href  + data, '_blank'));
+          javascript:void(window.open( data, '_blank'));
         }
       } 
      }).fail(function(jqXHR, textStatus, error) {
@@ -735,11 +1009,6 @@ function submit(boll) {
       });
  
    } else {
-       let allUsrsObs = document.querySelector('#allUsrsObs').checked;
-       let allUsrsEdi = document.querySelector('#allUsrsEdi').checked;
-       let allusrDEL = document.querySelector('#allusrDEL').checked;
-       let allustSENT = document.querySelector('#allustSENT').checked;
- 
        let usrObs = "AllOftheUsers";
        let usrEdi = "AllOftheUsers";
        let usrDEL = "AllOftheUsers";
@@ -752,18 +1021,11 @@ function submit(boll) {
        }
        Usrcols.push('passedVehicleRecordID');
  
-       if(!allUsrsObs) {
-         usrObs = $('#UserOBS').val().toString();
-       }
-       if(!allUsrsEdi) {
-         usrEdi = $('#usrEDIT').val().toString();
-       }
-       if(!allusrDEL) {
-         usrDEL = $('#usrDEL').val().toString();
-       }
-       if(!allustSENT) {
-         usrSENT = $('#ustSENT').val().toString();
-       }
+       usrObs = $('#UserOBS').val().toString();
+       usrEdi = $('#usrEDIT').val().toString();
+       usrDEL = $('#usrDEL').val().toString();
+       usrSENT = $('#ustSENT').val().toString();
+       
        // console.log('usrObs', usrObs);
        // console.log('usrEdi', usrEdi);
        // console.log('usrDEL', usrDEL);
@@ -773,40 +1035,39 @@ function submit(boll) {
         url: './model/reportQuery.php',
         async: false,
         data:{
-          status: 'innerJoin',
-         boll: boll,
-         cols: cols.toString(),
-         Usrcols: Usrcols.toString(),
-         startDate: startDate,
-         startTime: startTime,
-         endDate: endDate,
-         endTime: endTime,
-         cameraNames: cameraNames,
-         cameraIds: cameraIds,
-         AccuracyMin: AccuracyMin,
-         AccuracyMax: AccuracyMax,
-         minSpeed: minSpeed,
-         maxSpeed: maxSpeed,
-         lane1: lane1,
-         lane2: lane2,
-         lane3: lane3,
-         lane4: lane4,
-         lane5: lane5,
-         upToDown: upToDown,
-         downToUp: downToUp,
-         vehicleLight: vehicleLight,
-         vehicleHeavy: vehicleHeavy,
-         vehicleUnkown: vehicleUnkown,
-         plate: plate,
-         usrObs: usrObs,
-         usrEdi: usrEdi,
-         usrDEL: usrDEL,
-         usrSENT: usrSENT
+            status: 'innerJoin',
+            boll: boll,
+            cols: cols.toString(),
+            Usrcols: Usrcols.toString(),
+            startDate: startDate,
+            startTime: startTime,
+            endDate: endDate,
+            endTime: endTime,
+            Poles: Poles.toString(),
+            Cameras: Cameras.toString(),
+            AccuracyMin: AccuracyMin,
+            AccuracyMax: AccuracyMax,
+            minSpeed: minSpeed,
+            maxSpeed: maxSpeed,
+            lane1: lane1,
+            lane2: lane2,
+            lane3: lane3,
+            lane4: lane4,
+            lane5: lane5,
+            upToDown: upToDown,
+            downToUp: downToUp,
+            vehicleLight: vehicleLight,
+            vehicleHeavy: vehicleHeavy,
+            plate: plate,
+            usrObs: usrObs,
+            usrEdi: usrEdi,
+            usrDEL: usrDEL,
+            usrSENT: usrSENT
         },
         success: function(data) {
                   //dislabe loader
-        document.querySelector('#spinner').className = 'col-sm-12 d-flex justify-content-center hide';
-        document.body.style.opacity = '100%';
+        // document.querySelector('#spinner').className = 'col-sm-12 d-flex justify-content-center hide';
+        // document.body.style.opacity = '100%';
 
           console.log(data);
           if(data == 'no rec!') {
@@ -817,7 +1078,7 @@ function submit(boll) {
             alert(`${data} سطر یافت شد!`)
           } 
           else {
-            javascript:void(window.open( window.location.href  + data, '_blank'));
+            javascript:void(window.open( data, '_blank'));
           }
         }
          

@@ -537,9 +537,6 @@
      });
  </script>
 
-<script src="../fusioncharts/fusioncharts.js"></script>
-
-<script src="../fusioncharts/themes/fusioncharts.theme.fusion.js">
 </script>
 <script>
 

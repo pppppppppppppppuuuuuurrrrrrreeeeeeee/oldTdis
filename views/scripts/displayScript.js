@@ -24,16 +24,29 @@ var loader = document.querySelector('#loader');
 var transParent = document.getElementsByClassName('transParent');
 var btn = document.getElementsByClassName('btn');
 
+var Root;
+$.ajax({
+    type: "get",
+    url: "./model/getRoot.php",
+    async: false,
+    success: function(data) {
+        Root = data;
+    }
+}).fail(function(jqXHR, textStatus, error) {
+    alert('request to getRoot failed!');
+});
+
 ////////////////////socket client//////////////////
-// var socket = io('http://192.168.98.162:3000');
-// socket.on('connect', () => {
-//     console.log('client connected !');
-//     socket.on('recordId', (recordId) => {
-//         sentIds.push(recordId);
-//         vehicleInfo(vehicleIndex);
-//         console.log(recordId);
-//     });
-// });
+let sio = server = `${Root}:3000`;
+var socket = io(server);
+socket.on('connect', () => {
+    console.log('client connected !');
+    socket.on('recordId', (recordId) => {
+        sentIds.push(recordId);
+        vehicleInfo(vehicleIndex);
+        console.log(recordId);
+    });
+});
 
 
 var policeStatus;
@@ -783,8 +796,8 @@ function vehicleInfo(index) {
     document.getElementById('TDacc').innerHTML = queryVehilces[index].Accuracy;
     let imgI = queryVehilces[index].ImageAddress[0];
     let imgP = queryVehilces[index].ImageAddress[0].replace('I.jpg', 'P.jpg')
-    document.getElementById('primaryImg').src = `http://192.168.98.162/store/${imgI}`;
-    document.getElementById('pelakImg').src = `http://192.168.98.162/store/${imgP}`;
+    document.getElementById('primaryImg').src = `${Root}/store/${imgI}`;
+    document.getElementById('pelakImg').src = `${Root}/store/${imgP}`;
 
     let pelak = queryVehilces[index].MasterPlateValue;
     document.getElementById('boxNumber1').value = (pelak.slice(0, 2));

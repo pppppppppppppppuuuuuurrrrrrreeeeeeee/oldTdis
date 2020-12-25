@@ -56,30 +56,30 @@ else if ($status == 'PassedVehicleRecords')
     
     //poles and cameras
     $Poles = explode(',', $Poles);
-    ChromePhp::log($Poles);
-    ChromePhp::log($Cameras);
-    if($cameraNames === "" or $cameraIds === "") 
-    {
-        $cameraQuery = "";
-    }
-    else 
-    {
-        $cameraNames = explode(',', $cameraNames);
-        $cameraAllIDs = [];
-        foreach($cameraNames as &$names) 
-        {
-            $cameraAllIDs[] = getCameraID($names);
-        }
-        $cameraIds = explode(',', $cameraIds);
-        $cameraAllIDs = array_merge($cameraAllIDs, $cameraIds);
-        $cameraAllIDs = array_filter(array_unique($cameraAllIDs));
-        $cameraQuery = "";
-        if(count($cameraAllIDs) > 0) 
-        {
-            $cameraQuery =  "AND CameraID IN (".implode(',', $cameraAllIDs).")";
-        }
-    }
+    $Cameras = explode(',', $Cameras);
     
+    $cameraIDS = [];
+    if(count($Poles) > 1) {
+        foreach($Poles as $pole) {
+            $pole = readDeviceIdByPole($pole);
+            foreach($pole as $p) {
+                $cameraIDS[] = $p['DeviceID'];
+            }
+        }
+    } else if(count($Poles) == 1 and count($Cameras) > 0) {
+        foreach($Cameras as $cam) {
+            $cam = readDeviceIdByPoleAndName($Poles[0], $cam);
+            foreach($cam as $c) {
+                $cameraIDS[] = $c['DeviceID'];
+            }
+        }
+    }
+    // ChromePhp::log('cameraIDS');
+    // ChromePhp::log($cameraIDS);
+    $cameraIDS = implode(',', $cameraIDS);
+    $cameraQuery = "AND CameraID IN ($cameraIDS)";
+    // ChromePhp::log('cameraQuery');
+    // ChromePhp::log($cameraQuery);
     //acc
     if($AccuracyMin === "" and $AccuracyMax === "") 
     {
@@ -169,10 +169,6 @@ else if ($status == 'PassedVehicleRecords')
     {
         array_push($veh, 2);
     }
-    if($vehicleUnkown === "true") 
-    {
-        array_push($veh, 0);
-    }
 
     $vehQuery = "";
     if(count($veh) > 0) 
@@ -192,6 +188,8 @@ else if ($status == 'PassedVehicleRecords')
     $dirQuery
     $vehQuery
     AND MasterPlateValue LIKE '$plate'";
+
+    // ChromePhp::log($sql);
 
     $sqlCount = str_replace('{?}', 'COUNT(*)', $sql);
     if($boll == 'false') 
@@ -218,8 +216,10 @@ else if ($status == 'innerJoin')
     $startTime = filter_input(INPUT_POST, 'startTime');
     $endDate = filter_input(INPUT_POST, 'endDate');
     $endTime = filter_input(INPUT_POST, 'endTime');
-    $cameraNames = filter_input(INPUT_POST, 'cameraNames');
-    $cameraIds = filter_input(INPUT_POST, 'cameraIds');
+
+    $Poles = filter_input(INPUT_POST, 'Poles');
+    $Cameras = filter_input(INPUT_POST, 'Cameras');
+
     $AccuracyMin = filter_input(INPUT_POST, 'AccuracyMin');
     $AccuracyMax = filter_input(INPUT_POST, 'AccuracyMax');
     $minSpeed = filter_input(INPUT_POST, 'minSpeed');
@@ -233,7 +233,6 @@ else if ($status == 'innerJoin')
     $downToUp = filter_input(INPUT_POST, 'downToUp');
     $vehicleLight = filter_input(INPUT_POST, 'vehicleLight');
     $vehicleHeavy = filter_input(INPUT_POST, 'vehicleHeavy');
-    $vehicleUnkown = filter_input(INPUT_POST, 'vehicleUnkown');
     $plate = filter_input(INPUT_POST, 'plate');
     $usrObs = filter_input(INPUT_POST, 'usrObs');
     $usrEdi = filter_input(INPUT_POST, 'usrEdi');
@@ -253,27 +252,32 @@ else if ($status == 'innerJoin')
     $endDate = explode('/', $endDate);
     $endDate =  jalali_to_gregorian($endDate[0], $endDate[1], $endDate[2], true);
     
-    if($cameraNames === "" or $cameraIds === "") 
-    {
-        $cameraQuery = "";
-    }
-    else 
-    {
-        $cameraNames = explode(',', $cameraNames);
-        $cameraAllIDs = [];
-        foreach($cameraNames as &$names) 
-        {
-            array_push($cameraAllIDs, $names);
+    //poles and cameras
+    $Poles = explode(',', $Poles);
+    $Cameras = explode(',', $Cameras);
+    
+    $cameraIDS = [];
+    if(count($Poles) > 1) {
+        foreach($Poles as $pole) {
+            $pole = readDeviceIdByPole($pole);
+            foreach($pole as $p) {
+                $cameraIDS[] = $p['DeviceID'];
+            }
         }
-        $cameraIds = explode(',', $cameraIds);
-        $cameraAllIDs = array_merge($cameraAllIDs, $cameraIds);
-        $cameraAllIDs = array_filter(array_unique($cameraAllIDs));
-        $cameraQuery = "";
-        if(count($cameraAllIDs) > 0) 
-        {
-            $cameraQuery =  "AND CameraID IN (".implode(',', $cameraAllIDs).")";
+    } else if(count($Poles) == 1 and count($Cameras) > 0) {
+        foreach($Cameras as $cam) {
+            $cam = readDeviceIdByPoleAndName($Poles[0], $cam);
+            foreach($cam as $c) {
+                $cameraIDS[] = $c['DeviceID'];
+            }
         }
     }
+    // ChromePhp::log('cameraIDS');
+    // ChromePhp::log($cameraIDS);
+    $cameraIDS = implode(',', $cameraIDS);
+    $cameraQuery = "AND CameraID IN ($cameraIDS)";
+    // ChromePhp::log('cameraQuery');
+    // ChromePhp::log($cameraQuery);
     
     //acc
     if($AccuracyMin === "" and $AccuracyMax === "") 
@@ -366,10 +370,6 @@ else if ($status == 'innerJoin')
     {
         array_push($veh, 2);
     }
-    if($vehicleUnkown === "true") 
-    {
-        array_push($veh, 0);
-    }
 
     $vehQuery = "";
     if(count($veh) > 0) 
@@ -389,7 +389,7 @@ else if ($status == 'innerJoin')
         $dirQuery
         $vehQuery
         AND MasterPlateValue LIKE '$plate'";
-        
+            
     $sqlCamera = str_replace('{?}', $cols, $sqlCamera);
     
     //create users SQL
@@ -487,6 +487,8 @@ else if ($status == 'innerJoin')
         ON A.ID = B.passedVehicleRecordID
     ";
 
+    // ChromePhp::log($finalSql);
+
     $cols = explode(',', $cols);
     $Usrcols = explode(',', $Usrcols);
     $clomns = array_merge($cols, $Usrcols);
@@ -510,8 +512,10 @@ else if($status == "PassedVehicleRecordsZip") {
     $startTime = filter_input(INPUT_POST, 'startTime');
     $endDate = filter_input(INPUT_POST, 'endDate');
     $endTime = filter_input(INPUT_POST, 'endTime');
-    $cameraNames = filter_input(INPUT_POST, 'cameraNames');
-    $cameraIds = filter_input(INPUT_POST, 'cameraIds');
+
+    $Poles = filter_input(INPUT_POST, 'Poles');
+    $Cameras = filter_input(INPUT_POST, 'Cameras');
+
     $AccuracyMin = filter_input(INPUT_POST, 'AccuracyMin');
     $AccuracyMax = filter_input(INPUT_POST, 'AccuracyMax');
     $minSpeed = filter_input(INPUT_POST, 'minSpeed');
@@ -525,7 +529,6 @@ else if($status == "PassedVehicleRecordsZip") {
     $downToUp = filter_input(INPUT_POST, 'downToUp');
     $vehicleLight = filter_input(INPUT_POST, 'vehicleLight');
     $vehicleHeavy = filter_input(INPUT_POST, 'vehicleHeavy');
-    $vehicleUnkown = filter_input(INPUT_POST, 'vehicleUnkown');
     $plate = filter_input(INPUT_POST, 'plate');
 
 
@@ -536,27 +539,32 @@ else if($status == "PassedVehicleRecordsZip") {
     $endDate = explode('/', $endDate);
     $endDate =  jalali_to_gregorian($endDate[0], $endDate[1], $endDate[2], true);
     
-    if($cameraNames === "" or $cameraIds === "") 
-    {
-        $cameraQuery = "";
-    }
-    else 
-    {
-        $cameraNames = explode(',', $cameraNames);
-        $cameraAllIDs = [];
-        foreach($cameraNames as &$names) 
-        {
-            $cameraAllIDs[] = getCameraID($names);
+    //poles and cameras
+    $Poles = explode(',', $Poles);
+    $Cameras = explode(',', $Cameras);
+    
+    $cameraIDS = [];
+    if(count($Poles) > 1) {
+        foreach($Poles as $pole) {
+            $pole = readDeviceIdByPole($pole);
+            foreach($pole as $p) {
+                $cameraIDS[] = $p['DeviceID'];
+            }
         }
-        $cameraIds = explode(',', $cameraIds);
-        $cameraAllIDs = array_merge($cameraAllIDs, $cameraIds);
-        $cameraAllIDs = array_filter(array_unique($cameraAllIDs));
-        $cameraQuery = "";
-        if(count($cameraAllIDs) > 0) 
-        {
-            $cameraQuery =  "AND CameraID IN (".implode(',', $cameraAllIDs).")";
+    } else if(count($Poles) == 1 and count($Cameras) > 0) {
+        foreach($Cameras as $cam) {
+            $cam = readDeviceIdByPoleAndName($Poles[0], $cam);
+            foreach($cam as $c) {
+                $cameraIDS[] = $c['DeviceID'];
+            }
         }
     }
+    // ChromePhp::log('cameraIDS');
+    // ChromePhp::log($cameraIDS);
+    $cameraIDS = implode(',', $cameraIDS);
+    $cameraQuery = "AND CameraID IN ($cameraIDS)";
+    // ChromePhp::log('cameraQuery');
+    // ChromePhp::log($cameraQuery);
     
     //acc
     if($AccuracyMin === "" and $AccuracyMax === "") 
@@ -647,10 +655,6 @@ else if($status == "PassedVehicleRecordsZip") {
     {
         array_push($veh, 2);
     }
-    if($vehicleUnkown === "true") 
-    {
-        array_push($veh, 0);
-    }
 
     $vehQuery = "";
     if(count($veh) > 0) 
@@ -694,8 +698,10 @@ else if($status == 'innerJoinZip') {
     $startTime = filter_input(INPUT_POST, 'startTime');
     $endDate = filter_input(INPUT_POST, 'endDate');
     $endTime = filter_input(INPUT_POST, 'endTime');
-    $cameraNames = filter_input(INPUT_POST, 'cameraNames');
-    $cameraIds = filter_input(INPUT_POST, 'cameraIds');
+
+    $Poles = filter_input(INPUT_POST, 'Poles');
+    $Cameras = filter_input(INPUT_POST, 'Cameras');
+
     $AccuracyMin = filter_input(INPUT_POST, 'AccuracyMin');
     $AccuracyMax = filter_input(INPUT_POST, 'AccuracyMax');
     $minSpeed = filter_input(INPUT_POST, 'minSpeed');
@@ -709,7 +715,6 @@ else if($status == 'innerJoinZip') {
     $downToUp = filter_input(INPUT_POST, 'downToUp');
     $vehicleLight = filter_input(INPUT_POST, 'vehicleLight');
     $vehicleHeavy = filter_input(INPUT_POST, 'vehicleHeavy');
-    $vehicleUnkown = filter_input(INPUT_POST, 'vehicleUnkown');
     $plate = filter_input(INPUT_POST, 'plate');
     $usrObs = filter_input(INPUT_POST, 'usrObs');
     $usrEdi = filter_input(INPUT_POST, 'usrEdi');
@@ -729,27 +734,32 @@ else if($status == 'innerJoinZip') {
     $endDate = explode('/', $endDate);
     $endDate =  jalali_to_gregorian($endDate[0], $endDate[1], $endDate[2], true);
     
-    if($cameraNames === "" or $cameraIds === "") 
-    {
-        $cameraQuery = "";
-    }
-    else 
-    {
-        $cameraNames = explode(',', $cameraNames);
-        $cameraAllIDs = [];
-        foreach($cameraNames as &$names) 
-        {
-            array_push($cameraAllIDs, $names);
+    //poles and cameras
+    $Poles = explode(',', $Poles);
+    $Cameras = explode(',', $Cameras);
+    
+    $cameraIDS = [];
+    if(count($Poles) > 1) {
+        foreach($Poles as $pole) {
+            $pole = readDeviceIdByPole($pole);
+            foreach($pole as $p) {
+                $cameraIDS[] = $p['DeviceID'];
+            }
         }
-        $cameraIds = explode(',', $cameraIds);
-        $cameraAllIDs = array_merge($cameraAllIDs, $cameraIds);
-        $cameraAllIDs = array_filter(array_unique($cameraAllIDs));
-        $cameraQuery = "";
-        if(count($cameraAllIDs) > 0) 
-        {
-            $cameraQuery =  "AND CameraID IN (".implode(',', $cameraAllIDs).")";
+    } else if(count($Poles) == 1 and count($Cameras) > 0) {
+        foreach($Cameras as $cam) {
+            $cam = readDeviceIdByPoleAndName($Poles[0], $cam);
+            foreach($cam as $c) {
+                $cameraIDS[] = $c['DeviceID'];
+            }
         }
     }
+    // ChromePhp::log('cameraIDS');
+    // ChromePhp::log($cameraIDS);
+    $cameraIDS = implode(',', $cameraIDS);
+    $cameraQuery = "AND CameraID IN ($cameraIDS)";
+    // ChromePhp::log('cameraQuery');
+    // ChromePhp::log($cameraQuery);
     
     //acc
     if($AccuracyMin === "" and $AccuracyMax === "") 
@@ -841,10 +851,6 @@ else if($status == 'innerJoinZip') {
     if($vehicleHeavy === "true")
     {
         array_push($veh, 2);
-    }
-    if($vehicleUnkown === "true") 
-    {
-        array_push($veh, 0);
     }
 
     $vehQuery = "";

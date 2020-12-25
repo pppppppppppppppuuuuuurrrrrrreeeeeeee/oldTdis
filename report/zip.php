@@ -1,7 +1,9 @@
 <?php
+require 'ChromePhp.php';
 $path = $_POST['path'];
 $name = explode('/', $path);
-$nameexp = "export/".$name[1].".zip";
+$nameexp = "/var/www/html/export/".$name[1].".zip";
+ChromePhp::log($nameexp);
 // Get real path for our folder
 $rootPath = realpath($path);
 
