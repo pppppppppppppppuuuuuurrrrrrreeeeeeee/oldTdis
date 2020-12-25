@@ -50,7 +50,7 @@
     <form id="repForm" method="POST" action="report.php">
         <input name="username" style="display: none;" value="{username}" />
         <input name="password" style="display: none;" value="{password}" />
-        <input name="usergrup" style="display: none;" value="{usergrup}" />
+        <input name="usergrup" style="display: none;" value="{usergrup}" id="uuuname"  />
         <input name="time" style="display: none;" value="{time}" />
     </form>
     
@@ -124,7 +124,7 @@
             </div>
         </div>
     </nav>
-
+    
     <!-- END: Header-->
 
 
@@ -157,7 +157,7 @@
                 <li class=" nav-item"><a onclick="repForm()"><i class="feather icon-clipboard"></i><span
                             class="menu-title" data-i18n="Calender">گزارش</span></a>
                 </li>
-                <li class=" nav-item"><a href="setting.html"><i class="feather icon-settings"></i><span
+                <li id="setting" class=" nav-item"><a href="setting.html"><i class="feather icon-settings"></i><span
                             class="menu-title" data-i18n="Calender">تنظیمات</span></a>
                 </li>
 
@@ -166,7 +166,11 @@
         </div>
     </div>
     <!-- END: Main Menu-->
-
+    <script>
+        if(document.getElementById('uuuname').value == 'User') {
+            document.getElementById('setting').style.display = 'none';
+        }
+    </script>
     <!-- BEGIN: Content-->
     <div class="app-content content">
         <div class="content-overlay"></div>
@@ -523,6 +527,7 @@
     <!--socket io-->
     <script src="./lib/socket.io.js" integrity="sha512-v8ng/uGxkge3d1IJuEo6dJP8JViyvms0cly9pnbfRxT6/31c3dRWxIiwGnMSWwZjHKOuY3EVmijs7k1jz/9bLA==" crossorigin="anonymous"></script>
 
+    
     <script>
         $(".owl-carousel").owlCarousel({
             margin: 10,
