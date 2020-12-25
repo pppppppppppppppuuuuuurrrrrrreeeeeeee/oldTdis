@@ -1,7 +1,14 @@
 <?php
-require_once('./miladiBeShmsi.php');
-require_once('./functions.php');
-require_once('../ChromePhp.php');
+require 'miladiBeShmsi.php';
+require 'functions.php';
+
+function readDeviceIdByPole($pole) {
+    global $conn;
+
+    $sql = "SELECT DeviceID FROM `CameraInformation` WHERE PoleName = '$pole'";
+    $res = $conn->query($sql);
+    return($res->fetch_all(MYSQLI_ASSOC));
+}
 
 function readPassedVehicleRecords($startDate, $startTime, $endDate, $endTime,
 $cameras, $lanes, $types, $minAcc, $maxAcc, $minSpeed, $maxSpeed)
@@ -29,7 +36,7 @@ $cameras, $lanes, $types, $minAcc, $maxAcc, $minSpeed, $maxSpeed)
         AND VehicleType IN $types
         AND Lane IN $lanes
 lab;
-    // ChromePhp::log($sql);
+    ChromePhp::log($sql);
 
     $result = $conn->query($sql);
     $json = [];
@@ -84,12 +91,15 @@ lab;
     return $jsonArray;
 }
 
-$cameras = filter_input(INPUT_POST, "cameras");
-$cameras = json_decode($cameras, true);
-for($i = 0; $i < count($cameras); $i++)
-    $cameras[$i] = getCameraID($cameras[$i]);
-
-
+$poles = filter_input(INPUT_POST, "poles");
+$poles = json_decode($poles, true);
+$cameras = [];
+foreach($poles as $pole) {
+    $pole = readDeviceIdByPole($pole);
+    foreach($pole as $p) {
+        $cameras[] = $p['DeviceID'];
+    }
+}
 
 $startDate = filter_input(INPUT_POST, "startDate");
 $startTime = filter_input(INPUT_POST, "startTime");

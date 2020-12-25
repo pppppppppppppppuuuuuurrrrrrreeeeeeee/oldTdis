@@ -214,10 +214,9 @@
                                                     name="timepicker" placeholder="زمان را وارد کنید " />
                                             </div>
                                             <div class="col-lg-4 col-md-6 col-sm-12 float-right dflex">
-                                                <label for="first-name-vertical">دوربین ها :</label>
+                                                <label for="first-name-vertical">سامانه ها :</label>
 
-                                                <select id="cameras" class="form-control input-sm select2-multiple" multiple>
-
+                                                <select id="poles" class="form-control input-sm select2-multiple" multiple>
                                                 </select>
                                             </div>
                                             <div class="col-lg-4 col-md-6 col-sm-12 float-right dflex">
@@ -407,7 +406,7 @@
                                             </div>
                                             <div class="form-group btn-record">
 
-                                                <button id="btnPolice" type="button" class="btn btn-outline-success mb-1 waves-effect waves-light">ارسال
+                                                <button onclick="question()" id="btnPolice" type="button" class="btn btn-outline-success mb-1 waves-effect waves-light">ارسال
                                                     به
                                                     پلیس</button>
                                             </div>
@@ -695,7 +694,7 @@ $(function () {
     })
 })()
 </script>
-
+<script src="./lib/sweetalert2@10.js"></script>
 <script src="./views/scripts/displayScript.js"></script>
 <!-- <script src="./views/scripts/cameraRefresh.js"></script> -->
 <script>

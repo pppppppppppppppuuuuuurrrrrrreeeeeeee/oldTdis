@@ -113,7 +113,7 @@ function comparedate($_date_mix_jalaly,$_date_mix_gregorian)
   $_date_arr_jalaly = explode('/', $_date_mix_jalaly);
   $_date_arr_gregorian = explode('/', $_date_mix_gregorian);		
   
-  $arr_jtg = jalali_to_gregorian($_date_arr_jalaly[0],$_date_arr_jalaly[1],$_date_arr_jalaly[2]);
+  $arr_jtg = jalali_to_gregorian($_date_arr_jalaly[0],$_date_arr_jalaly[1],$_date_arr_jalaly[2], true);
 		
   if($_date_arr_gregorian[0]> $arr_jtg[0])
     {

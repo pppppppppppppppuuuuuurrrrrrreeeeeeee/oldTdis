@@ -103,13 +103,13 @@ function readFile(imgAddr, plateAddr, callback) {
     xhr.send();
 }
 
-$.get("./model/getCameraNames.php", function(data) {
+$.get("./model/getCameraPoles.php", function(data) {
     data = JSON.parse(data);
     for(let i = 0; i < data.length; i++) {
-        let cam = document.createElement('option');
-        cam.innerHTML = data[i].Name;
-        cam.setAttribute('selected', 'selected');
-        document.getElementById('cameras').appendChild(cam);
+        let pole = document.createElement('option');
+        pole.innerHTML = data[i].PoleName;
+        pole.setAttribute('selected', 'selected');
+        document.getElementById('poles').appendChild(pole);
     }
 });
 
@@ -185,7 +185,7 @@ function maneeTaradod() {
     let Alphabet = document.getElementById("boxNumber2").value;
     let ThreeNum =convertToEnglishNum(document.getElementById("boxNumber3").value);
     let TwoLastNum = convertToEnglishNum(document.getElementById("boxNumber4").value);
-    let MasterPlateValue = document.getElementById('TDrecordPlate').innerText;
+    let MasterPlateValue = readPlate();
 
     let Pre = "";
     if (Alphabet == "الف")
@@ -261,7 +261,7 @@ function sendToPolice() {
     let Alphabet = document.getElementById("boxNumber2").value;
     let ThreeNum =convertToEnglishNum(document.getElementById("boxNumber3").value);
     let TwoLastNum = convertToEnglishNum(document.getElementById("boxNumber4").value);
-    let MasterPlateValue = document.getElementById('TDrecordPlate').innerText;
+    let MasterPlateValue = readPlate();
     
     let speedch = document.getElementById('TDspeed').innerText;
     if(speedch < 70) {
@@ -593,7 +593,7 @@ function getCurrentDate() {
 }
 
 function submit() {
-    let cameras = $("#cameras").val();
+    let poles = $("#poles").val();
 
     let startDate = document.getElementById('startDate').value;
     let startTime = document.getElementById('startTime').value;
@@ -660,10 +660,10 @@ function submit() {
 
     // console.log(lanes);
     // console.log(types);
-
+    console.log(poles);
     $.post("./model/readVehicles.php",
     {
-        cameras: JSON.stringify(cameras),
+        poles: JSON.stringify(poles),
         startDate: startDate,
         startTime: startTime,
         endDate: endDate,
