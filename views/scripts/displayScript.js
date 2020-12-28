@@ -376,7 +376,7 @@ function createPacket(plateNo, packetStatus, callback) {
     let Speed = document.getElementById('TDspeed').innerText;
 
     if(packetStatus == 'soraat') {
-        if(Speed > 70 && Speed <= 90)
+        if(Speed >= 70 && Speed <= 90)
             ViolationTypeCode = "2056";
         else if(Speed > 90 && Speed <= 110)
             ViolationTypeCode = "2008";
